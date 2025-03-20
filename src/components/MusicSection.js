@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
 import { useAudio } from '../utils/AudioContext';
 
 // Placeholder album data
@@ -92,95 +91,77 @@ const MusicSection = () => {
   } = useAudio();
   
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    const { gsap } = initializeGSAP();
     
     const section = sectionRef.current;
     const player = playerRef.current;
     const albumGrid = albumGridRef.current;
     
-    // Animation for section title
-    gsap.fromTo(
-      section.querySelector('h2'),
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
-      }
-    );
+    if (!section || !player || !albumGrid) return;
     
-    // Player animation
-    gsap.fromTo(
-      player,
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        delay: 0.2,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
+    try {
+      // Animation for section title
+      const titleElement = section.querySelector('h2');
+      if (titleElement) {
+        createScrollAnimation(
+          titleElement,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8 },
+          { trigger: section }
+        );
       }
-    );
-    
-    // Waveform animation
-    gsap.fromTo(
-      player.querySelector('.waveform'),
-      { scaleX: 0 },
-      {
-        scaleX: 1,
-        duration: 1,
-        delay: 0.6,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
+      
+      // Player animation
+      createScrollAnimation(
+        player,
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, delay: 0.2 },
+        { trigger: section }
+      );
+      
+      // Waveform animation
+      const waveformElement = player.querySelector('.waveform');
+      if (waveformElement) {
+        createScrollAnimation(
+          waveformElement,
+          { scaleX: 0 },
+          { scaleX: 1, duration: 1, delay: 0.6, ease: 'power3.out' },
+          { trigger: section }
+        );
       }
-    );
-    
-    // Album grid animation
-    gsap.fromTo(
-      albumGrid.querySelectorAll('.album-item'),
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        delay: 0.4,
-        scrollTrigger: {
-          trigger: albumGrid,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
+      
+      // Album grid animation
+      const albumItems = albumGrid.querySelectorAll('.album-item');
+      if (albumItems.length) {
+        createScrollAnimation(
+          albumItems,
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, delay: 0.4 },
+          { trigger: albumGrid }
+        );
       }
-    );
-    
-    // Animate waveform continuously
-    gsap.to(
-      player.querySelectorAll('.wave-bar'),
-      {
-        scaleY: 'random(0.3, 1)',
-        duration: 0.8,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-        stagger: {
-          each: 0.05,
-          from: 'random'
-        }
+      
+      // Animate waveform continuously
+      const waveBars = player.querySelectorAll('.wave-bar');
+      if (waveBars.length) {
+        gsap.to(
+          waveBars,
+          {
+            scaleY: 'random(0.3, 1)',
+            duration: 0.8,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+            stagger: {
+              each: 0.05,
+              from: 'random'
+            }
+          }
+        );
       }
-    );
+    } catch (error) {
+      console.error('Error in MusicSection animations:', error);
+    }
   }, []);
   
   // Handle album play

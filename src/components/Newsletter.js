@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
 
 const Newsletter = () => {
   const sectionRef = useRef(null);
@@ -11,44 +10,35 @@ const Newsletter = () => {
   const [error, setError] = useState('');
   
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    const { gsap } = initializeGSAP();
     
     const section = sectionRef.current;
     const form = formRef.current;
     
-    // Animation for content
-    gsap.fromTo(
-      section.querySelectorAll('.animate-in'),
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
-      }
-    );
+    if (!section || !form) return;
     
-    // Form animation
-    gsap.fromTo(
-      form,
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        delay: 0.3,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
+    try {
+      // Animation for content
+      const animElements = section.querySelectorAll('.animate-in');
+      if (animElements.length) {
+        createScrollAnimation(
+          animElements,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, stagger: 0.1 },
+          { trigger: section }
+        );
       }
-    );
+      
+      // Form animation
+      createScrollAnimation(
+        form,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, delay: 0.3 },
+        { trigger: section }
+      );
+    } catch (error) {
+      console.error('Error in Newsletter animations:', error);
+    }
   }, []);
   
   const handleSubmit = (e) => {

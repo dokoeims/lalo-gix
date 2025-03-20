@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
 
 // Placeholder events data
 const events = [
@@ -39,44 +38,38 @@ const EventsSection = () => {
   const eventsListRef = useRef(null);
   
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    const { gsap } = initializeGSAP();
     
     const section = sectionRef.current;
     const eventsList = eventsListRef.current;
     
-    // Animation for the section title
-    gsap.fromTo(
-      section.querySelector('h2'),
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
-      }
-    );
+    if (!section || !eventsList) return;
     
-    // Event items animation
-    gsap.fromTo(
-      eventsList.querySelectorAll('.event-item'),
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        delay: 0.2,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
+    try {
+      // Animation for the section title
+      const titleElement = section.querySelector('h2');
+      if (titleElement) {
+        createScrollAnimation(
+          titleElement,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8 },
+          { trigger: section }
+        );
       }
-    );
+      
+      // Event items animation
+      const eventItems = eventsList.querySelectorAll('.event-item');
+      if (eventItems.length) {
+        createScrollAnimation(
+          eventItems,
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, delay: 0.2 },
+          { trigger: section }
+        );
+      }
+    } catch (error) {
+      console.error('Error in EventsSection animations:', error);
+    }
   }, []);
   
   return (

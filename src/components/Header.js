@@ -35,10 +35,10 @@ const Header = () => {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#music" className="text-sm hover:text-accent transition-colors">MUSIC</a>
-          <a href="#bio" className="text-sm hover:text-accent transition-colors">BIO</a>
-          <a href="#events" className="text-sm hover:text-accent transition-colors">EVENTS</a>
-          <a href="#newsletter" className="text-sm hover:text-accent transition-colors">CONTACT</a>
+          <a href="#music" className="text-sm hover:text-accent transition-colors">MUSICA</a>
+          <a href="#bio" className="text-sm hover:text-accent transition-colors">BIOGRAFÍA</a>
+          <a href="#events" className="text-sm hover:text-accent transition-colors">EVENTOS</a>
+          <a href="#newsletter" className="text-sm hover:text-accent transition-colors">CONTACTO</a>
         </nav>
         
         {/* Mobile Menu Button */}

@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
 
 const BioSection = () => {
   const sectionRef = useRef(null);
@@ -8,76 +7,73 @@ const BioSection = () => {
   const [expanded, setExpanded] = useState(false);
   
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    const { gsap } = initializeGSAP();
     
     const section = sectionRef.current;
     const card = cardRef.current;
     
-    // Animation for the section title
-    gsap.fromTo(
-      section.querySelector('h2'),
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
-      }
-    );
+    if (!section || !card) return;
     
-    // Glass card animation
-    gsap.fromTo(
-      card,
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        delay: 0.2,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
+    try {
+      // Animation for the section title
+      const titleElement = section.querySelector('h2');
+      if (titleElement) {
+        createScrollAnimation(
+          titleElement,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8 },
+          { trigger: section }
+        );
       }
-    );
-    
-    // Content animations
-    gsap.fromTo(
-      card.querySelectorAll('p'),
-      { y: 20, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        delay: 0.4,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
+      
+      // Glass card animation
+      createScrollAnimation(
+        card,
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, delay: 0.2 },
+        { trigger: section }
+      );
+      
+      // Content animations
+      const paragraphs = card.querySelectorAll('p');
+      if (paragraphs.length) {
+        createScrollAnimation(
+          paragraphs,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, delay: 0.4 },
+          { trigger: section }
+        );
       }
-    );
+    } catch (error) {
+      console.error('Error in BioSection animations:', error);
+    }
   }, []);
   
-  // Handle expanding/collapsing bio text
+  // Handle expanding/collapsing bio text using useRef for better targeting
+  const expandedContentRef = useRef(null);
+  
   const toggleExpanded = () => {
+    // Initialize GSAP
+    const { gsap } = initializeGSAP();
+    
     setExpanded(!expanded);
     
-    // Animate the expansion/collapse
-    if (!expanded) {
-      gsap.fromTo(
-        '.expanded-content',
-        { height: 0, opacity: 0 },
-        { height: 'auto', opacity: 1, duration: 0.5, ease: 'power2.out' }
-      );
-    } else {
-      gsap.to('.expanded-content', { height: 0, opacity: 0, duration: 0.5, ease: 'power2.in' });
+    // Make sure we have the DOM element before animating
+    if (!expandedContentRef.current) return;
+    
+    try {
+      // Animate the expansion/collapse
+      if (!expanded) {
+        gsap.fromTo(
+          expandedContentRef.current,
+          { height: 0, opacity: 0 },
+          { height: 'auto', opacity: 1, duration: 0.5, ease: 'power2.out' }
+        );
+      } else {
+        gsap.to(expandedContentRef.current, { height: 0, opacity: 0, duration: 0.5, ease: 'power2.in' });
+      }
+    } catch (error) {
+      console.error('Error in bio toggling animation:', error);
     }
   };
   
@@ -108,7 +104,7 @@ const BioSection = () => {
             the sonic journey.
           </p>
           
-          <div className={`expanded-content overflow-hidden ${expanded ? '' : 'h-0 opacity-0'}`}>
+          <div ref={expandedContentRef} className={`overflow-hidden ${expanded ? '' : 'h-0 opacity-0'}`}>
             <p className="mb-6 leading-relaxed">
               With a background in classical music and sound design, Lalo Gix brings a deep
               understanding of sonic textures to his productions. His work often explores the

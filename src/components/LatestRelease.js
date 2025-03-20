@@ -1,20 +1,30 @@
 import React, { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
 import { useAudio } from '../utils/AudioContext';
+import CroakCover from '../assets/croak.jpg';
+import CroakAudio from '../assets/croak.mp3';
 
 // Latest release data
 const latestRelease = {
-  title: 'NEBULA DREAMS',
-  type: 'EP',
-  releaseDate: 'Oct 2024',
-  coverImage: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6a3?q=80&w=2070',
-  description: 'A journey through ambient soundscapes and experimental electronic rhythms. This EP represents a new direction in Lalo Gix\'s exploration of sound, combining ethereal textures with pulsating beats.',
+  title: 'CROAK',
+  type: 'SINGLE',
+  releaseDate: 'Noviembre 2020',
+  coverImage: CroakCover,
+  description: 'Eran el dúo dinámico de la laguna, hasta que el amor se escurrió entre sus patas. Ahora, una salta sin mirar atrás, mientras la otra sigue atrapada en el lodo de los recuerdos. 🐸💔',
   tracks: [
-    { id: 101, title: 'Cosmic Journey', duration: '3:42', album: 'Nebula Dreams EP' },
-    { id: 102, title: 'Stellar Waves', duration: '4:15', album: 'Nebula Dreams EP' },
-    { id: 103, title: 'Nebula Drift', duration: '5:30', album: 'Nebula Dreams EP' },
-    { id: 104, title: 'Astral Projection', duration: '6:08', album: 'Nebula Dreams EP' }
+    { 
+      id: 101, 
+      title: 'Croak', 
+      duration: '0:30', 
+      album: 'Croak',
+      audioUrl: CroakAudio,
+      spotifyUrl: 'https://open.spotify.com/track/2R12hIKqax4p9pOVuYmEDQ',
+      appleMusicUrl: 'https://music.apple.com/mx/album/croak/1802811045?i=1802811046',
+      tidalUrl: 'https://tidal.com/browse/track/424566323',
+      youtubeMusicUrl: 'https://music.youtube.com/watch?v=MkxLJmHn-c4&si=x__jU7VhUuiDme9q',
+      amazonMusicUrl: 'https://music.amazon.com.mx/tracks/B0F1SDXWW3',
+      soundcloudUrl: 'https://soundcloud.com/lalo-gix/croak',
+    },
   ]
 };
 
@@ -25,61 +35,46 @@ const LatestRelease = () => {
   const { playTrack } = useAudio();
   
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    const { gsap } = initializeGSAP();
     
     const section = sectionRef.current;
     const card = cardRef.current;
     
-    // Animation for the section title
-    gsap.fromTo(
-      section.querySelector('h2'),
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
-      }
-    );
+    if (!section || !card) return;
     
-    // Glass card animation
-    gsap.fromTo(
-      card,
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        delay: 0.2,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
+    try {
+      // Animation for the section title
+      const titleElement = section.querySelector('h2');
+      if (titleElement) {
+        createScrollAnimation(
+          titleElement,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8 },
+          { trigger: section }
+        );
       }
-    );
-    
-    // Content elements animation
-    gsap.fromTo(
-      card.querySelectorAll('.animate-in'),
-      { y: 20, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        delay: 0.4,
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
+      
+      // Glass card animation
+      createScrollAnimation(
+        card,
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, delay: 0.2 },
+        { trigger: section }
+      );
+      
+      // Content elements animation
+      const animElements = card.querySelectorAll('.animate-in');
+      if (animElements.length) {
+        createScrollAnimation(
+          animElements,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, delay: 0.4 },
+          { trigger: section }
+        );
       }
-    );
+    } catch (error) {
+      console.error('Error in LatestRelease animations:', error);
+    }
   }, []);
   
   // Play the first track from the release
@@ -96,7 +91,7 @@ const LatestRelease = () => {
       className="py-24 px-4 relative"
     >
       <div className="container mx-auto">
-        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">LATEST RELEASE</h2>
+        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">SENCILLO MÁS POPULAR</h2>
         
         {/* Glass card */}
         <div 
@@ -108,7 +103,7 @@ const LatestRelease = () => {
             <img 
               src={latestRelease.coverImage}
               alt={latestRelease.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-top"
             />
           </div>
           
@@ -116,7 +111,7 @@ const LatestRelease = () => {
           <div className="flex-grow flex flex-col justify-between">
             <div>
               <h3 className="animate-in text-2xl md:text-3xl font-montserrat font-bold mb-2">{latestRelease.title}</h3>
-              <p className="animate-in text-gray-400 mb-6">{latestRelease.type} • Released {latestRelease.releaseDate}</p>
+              <p className="animate-in text-gray-400 mb-6">{latestRelease.type} • Lanzamiento {latestRelease.releaseDate}</p>
               <p className="animate-in text-gray-300 mb-8 max-w-lg">
                 {latestRelease.description}
               </p>
@@ -129,7 +124,7 @@ const LatestRelease = () => {
                 aria-label="Play Nebula Dreams"
                 onClick={handlePlay}
               >
-                <svg className="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </button>
@@ -137,7 +132,7 @@ const LatestRelease = () => {
               {/* Streaming platform links */}
               <div className="animate-in flex flex-wrap gap-3">
                 <a 
-                  href="https://spotify.com" 
+                  href={latestRelease.tracks[0].spotifyUrl} 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
@@ -145,7 +140,7 @@ const LatestRelease = () => {
                   Spotify
                 </a>
                 <a 
-                  href="https://music.apple.com" 
+                  href={latestRelease.tracks[0].appleMusicUrl} 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
@@ -153,20 +148,37 @@ const LatestRelease = () => {
                   Apple
                 </a>
                 <a 
-                  href="https://soundcloud.com" 
+                  href={latestRelease.tracks[0].tidalUrl} 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
                 >
-                  SoundCloud
+                  Tidal
                 </a>
+                
                 <a 
-                  href="https://youtube.com" 
+                  href={latestRelease.tracks[0].youtubeMusicUrl} 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
                 >
                   YouTube
+                </a>
+                <a 
+                  href={latestRelease.tracks[0].amazonMusicUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
+                >
+                  Amazon
+                </a>
+                <a 
+                  href={latestRelease.tracks[0].soundcloudUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
+                >
+                  SoundCloud
                 </a>
               </div>
             </div>
