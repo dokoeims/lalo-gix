@@ -99,7 +99,7 @@ const BioSection = () => {
             Nunca ha ganado el prestigioso premio Grammy, ni el Billboard, ni siquiera una mención 
             honorífica en el concurso de talentos local, principalmente porque nunca ha sido invitado 
             a participar en ninguno de ellos. Su música resuena profundamente con sus más fieles seguidores: 
-            su novia, su mamá, y ocasionalmente, su amigo Luis cuando logra pagar su suscripción a Spotify.
+            su novia, su familia, y ocasionalmente, su amigo Luis cuando logra pagar su suscripción a Spotify.
 
           </p>
           
@@ -121,7 +121,7 @@ const BioSection = () => {
             
             <p className="mb-6 leading-relaxed">
             Lalo Gix creó esta página web con la esperanza de que otros artistas independientes pudieran 
-              encontrarla útil como plantilla. El repositorio es código abierto en su GitHub, porque 
+              encontrarla útil como plantilla. El repositorio es código abierto en su <a href="https://github.com/dokoeims/lalo-gix" target="_blank" rel="noopener noreferrer" className='text-accent hover:text-accent/80 transition-colors duration-300'>GitHub</a>, porque 
               compartir es vivir, especialmente cuando no se tienen contratos discográficos exclusivos que lo impidan.
             </p>
             <p className="mb-6 leading-relaxed">
