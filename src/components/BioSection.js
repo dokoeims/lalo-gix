@@ -83,7 +83,7 @@ const BioSection = () => {
       className="py-24 px-4 bg-gradient-to-b from-light-bg to-dark-bg"
     >
       <div className="container mx-auto">
-        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">ABOUT LALO GIX</h2>
+        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">ACERCA DE LALO GIX</h2>
         
         {/* Bio content with glass card */}
         <div 
@@ -91,46 +91,53 @@ const BioSection = () => {
           className="glass-card p-8 max-w-4xl mx-auto"
         >
           <p className="mb-6 leading-relaxed">
-            Lalo Gix is an electronic music producer and performer known for blending ambient
-            soundscapes with experimental rhythms. Based in Berlin, his unique approach to
-            electronic music has earned him recognition in the underground scene.
+            Lalo Gix, ingeniero de software de día y "productor musical" de noche, emerge como una 
+            figura reconocida en su sala de estar, donde crea música experimental cuando los bugs del código son demasiado obstinados y necesita desahogar sus frustraciones rítmicamente.
           </p>
           
           <p className="mb-6 leading-relaxed">
-            Drawing inspiration from both natural environments and urban landscapes, Lalo's
-            music creates immersive experiences that transport listeners to otherworldly realms.
-            His live performances feature improvisation and visual elements that complement
-            the sonic journey.
+            Nunca ha ganado el prestigioso premio Grammy, ni el Billboard, ni siquiera una mención 
+            honorífica en el concurso de talentos local, principalmente porque nunca ha sido invitado 
+            a participar en ninguno de ellos. Su música resuena profundamente con sus más fieles seguidores: 
+            su novia, su mamá, y ocasionalmente, su amigo Luis cuando logra pagar su suscripción a Spotify.
+
           </p>
           
           <div ref={expandedContentRef} className={`overflow-hidden ${expanded ? '' : 'h-0 opacity-0'}`}>
             <p className="mb-6 leading-relaxed">
-              With a background in classical music and sound design, Lalo Gix brings a deep
-              understanding of sonic textures to his productions. His work often explores the
-              boundaries between organic and synthetic sounds, creating a signature style that
-              defies easy categorization.
+              Su próxima gira "Mi Casa Es Tu Casa Tour 2025" incluye presentaciones exclusivas en su sala, 
+              su cocina y, si el clima lo permite, en el patio trasero donde sus perros son el público más 
+              leal. Ellos nunca se pierden una sesión de estudio, demostrando que el verdadero talento se 
+              reconoce incluso entre especies.
             </p>
             
             <p className="mb-6 leading-relaxed">
-              Since his debut in 2018, Lalo has released a series of critically acclaimed EPs
-              and albums, each showcasing a progression in his artistic vision. His collaborations
-              with visual artists and filmmakers have extended his creative reach beyond music
-              into multisensory experiences.
+              Con su MacBook desgastado y GarageBand como aliados, conectados heroicamente a un piano digital 
+              y un micrófono comprado en oferta, Lalo define lo que significa ser un artista independiente 
+              en el sentido más literal del término. Su estudio, situado estratégicamente entre la lavadora 
+              y el refrigerador, le proporciona la acústica perfecta para sus composiciones atmosféricas y 
+              el fácil acceso a refrigerios durante las largas sesiones nocturnas.
             </p>
             
             <p className="mb-6 leading-relaxed">
-              When not touring or in the studio, Lalo hosts workshops on sound design and
-              electronic music production, sharing his knowledge with emerging artists. He
-              remains committed to pushing the boundaries of electronic music while building
-              community within the scene.
+            Lalo Gix creó esta página web con la esperanza de que otros artistas independientes pudieran 
+              encontrarla útil como plantilla. El repositorio es código abierto en su GitHub, porque 
+              compartir es vivir, especialmente cuando no se tienen contratos discográficos exclusivos que lo impidan.
             </p>
+            <p className="mb-6 leading-relaxed">
+              A pesar de su falta de fama internacional o incluso reconocimiento en su vecindario, 
+              Lalo sigue dedicado a su arte, feliz de compartir su música con las personas que conoce 
+              y le importan. Porque al final del día, ¿no es eso lo que realmente importa? (Eso, y que 
+              los perros no ladren durante la grabación).
+            </p>
+
           </div>
           
           <button 
             onClick={toggleExpanded}
             className="text-accent hover:text-accent/80 transition-colors duration-300 flex items-center mt-2"
           >
-            {expanded ? 'READ LESS' : 'READ MORE'}
+            {expanded ? 'LEER MENOS' : 'LEER MÁS'}
             <svg 
               className={`ml-1 w-4 h-4 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`} 
               viewBox="0 0 24 24" 

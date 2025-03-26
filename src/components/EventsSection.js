@@ -78,7 +78,7 @@ const EventsSection = () => {
       className="py-24 px-4"
     >
       <div className="container mx-auto">
-        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">UPCOMING EVENTS</h2>
+        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">MI CASA ES TU CASA TOUR 2025</h2>
         
         {/* Events list */}
         <div ref={eventsListRef} className="max-w-4xl mx-auto">
