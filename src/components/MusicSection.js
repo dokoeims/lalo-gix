@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
 import { useAudio } from '../contexts/AudioContext';
@@ -9,6 +9,10 @@ const MusicSection = () => {
   const sectionRef = useRef(null);
   const playerRef = useRef(null);
   const albumGridRef = useRef(null);
+  const waveformRef = useRef(null);
+  
+  // Number of wave bars to show - will be adjusted based on screen width
+  const [numWaveBars, setNumWaveBars] = useState(100);
   
   const { 
     currentTrack, 
@@ -24,6 +28,30 @@ const MusicSection = () => {
     seekTo
   } = useAudio();
   
+  // Adjust number of wave bars based on screen width
+  useEffect(() => {
+    const handleResize = () => {
+      const waveformWidth = waveformRef.current?.clientWidth || 0;
+      // Calculate optimal number of bars (approximately 1 bar every 4-5px on larger screens, 3px on smaller screens)
+      // Using fewer bars to prevent overflow on mobile
+      const optimalBars = Math.max(
+        50, // Minimum 50 bars
+        Math.min(
+          200, // Maximum 200 bars
+          Math.floor(waveformWidth / (window.innerWidth < 768 ? 3 : 5))
+        )
+      );
+      setNumWaveBars(optimalBars);
+    };
+    
+    // Initial calculation
+    handleResize();
+    
+    // Update on resize
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     const { gsap } = initializeGSAP();
     
@@ -184,31 +212,35 @@ const MusicSection = () => {
           </div>
           
           {/* Waveform visualization */}
-          <div className={`relative h-16 mb-2 waveform origin-left ${isFading ? 'fade-progress-glow' : ''}`}>
-            <div className="absolute inset-0 flex items-center">
-              {/* Generate 100 wave bars */}
-              {[...Array(100)].map((_, index) => (
-                <div 
-                  key={index}
-                  className={`wave-bar h-8 w-1 mx-px ${
-                    currentTrack && index < progress 
-                      ? `bg-accent ${
-                         isFading 
-                           ? 'wave-fade-animation' 
-                           : remainingTime && remainingTime <= 8 && remainingTime > 5 && !isFading 
-                             ? 'wave-ending-soon' 
-                             : 'opacity-70'
-                       }` 
-                      : 'bg-accent opacity-20'
-                  }`}
-                  style={{ 
-                    transform: `scaleY(${Math.random() * 0.7 + 0.3})`,
-                    animationPlayState: isPlaying ? 'running' : 'paused',
-                    '--wave-height': `${Math.random() * 0.7 + 0.3}`,
-                    opacity: isFading ? undefined : (index < progress ? 0.7 : 0.2)
-                  }}
-                ></div>
-              ))}
+          <div className={`relative h-16 mb-2 waveform origin-left w-full ${isFading ? 'fade-progress-glow' : ''}`}>
+            <div className="absolute inset-0 flex items-center w-full">
+              {/* Dynamic number of wave bars based on screen width */}
+              <div ref={waveformRef} className="w-full flex justify-between items-center overflow-hidden">
+                {[...Array(numWaveBars)].map((_, index) => (
+                  <div 
+                    key={index}
+                    className={`wave-bar h-8 flex-1 mx-[0.25px] ${
+                      currentTrack && index < (progress * numWaveBars / 100) 
+                        ? `bg-accent ${
+                           isFading 
+                             ? 'wave-fade-animation' 
+                             : remainingTime && remainingTime <= 8 && remainingTime > 5 && !isFading 
+                               ? 'wave-ending-soon' 
+                               : 'opacity-70'
+                         }` 
+                        : 'bg-accent opacity-20'
+                    }`}
+                    style={{ 
+                      transform: `scaleY(${Math.random() * 0.7 + 0.3})`,
+                      animationPlayState: isPlaying ? 'running' : 'paused',
+                      '--wave-height': `${Math.random() * 0.7 + 0.3}`,
+                      opacity: isFading ? undefined : (index < (progress * numWaveBars / 100) ? 0.7 : 0.2),
+                      minWidth: '1px',
+                      maxWidth: '4px'
+                    }}
+                  ></div>
+                ))}
+              </div>
             </div>
           </div>
           
