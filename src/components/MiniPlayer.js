@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useAudio } from '../utils/AudioContext';
+import { useAudio } from '../contexts/AudioContext';
 import { gsap } from 'gsap';
 
 const MiniPlayer = () => {

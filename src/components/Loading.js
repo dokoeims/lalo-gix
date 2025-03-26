@@ -8,8 +8,8 @@ const Loading = () => {
           <div className="absolute w-full h-full border-4 border-white border-opacity-10 rounded-full"></div>
           <div className="absolute w-full h-full border-4 border-t-accent border-opacity-80 rounded-full animate-spin"></div>
         </div>
-        <h2 className="text-xl font-montserrat font-light">LOADING</h2>
-        <p className="text-gray-400 text-sm mt-2">Please wait a moment...</p>
+        <h2 className="text-xl font-montserrat font-light">CARGANDO MÚSICA</h2>
+        <p className="text-gray-400 text-sm mt-2">Por favor, espera un momento...</p>
       </div>
     </div>
   );

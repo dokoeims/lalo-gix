@@ -1,13 +1,13 @@
 import React, { useRef, useEffect } from 'react';
-import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
-import { useAudio } from '../utils/AudioContext';
-import CroakCover from '../assets/croak.jpg';
-import CroakAudio from '../assets/croak.mp3';
+import { createScrollAnimation } from '../utils/initializeGSAP';
+import { useAudio } from '../contexts/AudioContext';
+import CroakCover from '../assets/covers/croak.jpg';
+import CroakAudio from '../assets/audios/croak.mp3';
 
 // Latest release data
 const latestRelease = {
   title: 'CROAK',
-  type: 'SINGLE',
+  type: 'SENCILLO',
   releaseDate: 'Noviembre 2020',
   coverImage: CroakCover,
   description: 'Eran el dúo dinámico de la laguna, hasta que el amor se escurrió entre sus patas. Ahora, una salta sin mirar atrás, mientras la otra sigue atrapada en el lodo de los recuerdos. 🐸💔',
@@ -16,7 +16,7 @@ const latestRelease = {
       id: 101, 
       title: 'Croak', 
       duration: '0:30', 
-      album: 'Croak',
+      album: 'Croak - Single',
       audioUrl: CroakAudio,
       spotifyUrl: 'https://open.spotify.com/track/2R12hIKqax4p9pOVuYmEDQ',
       appleMusicUrl: 'https://music.apple.com/mx/album/croak/1802811045?i=1802811046',
@@ -35,7 +35,6 @@ const LatestRelease = () => {
   const { playTrack } = useAudio();
   
   useEffect(() => {
-    const { gsap } = initializeGSAP();
     
     const section = sectionRef.current;
     const card = cardRef.current;
@@ -111,7 +110,7 @@ const LatestRelease = () => {
           <div className="flex-grow flex flex-col justify-between">
             <div>
               <h3 className="animate-in text-2xl md:text-3xl font-montserrat font-bold mb-2">{latestRelease.title}</h3>
-              <p className="animate-in text-gray-400 mb-6">{latestRelease.type} • Lanzamiento {latestRelease.releaseDate}</p>
+              <p className="animate-in text-gray-400 mb-6">{latestRelease.type} • {latestRelease.releaseDate}</p>
               <p className="animate-in text-gray-300 mb-8 max-w-lg">
                 {latestRelease.description}
               </p>
@@ -131,6 +130,14 @@ const LatestRelease = () => {
               
               {/* Streaming platform links */}
               <div className="animate-in flex flex-wrap gap-3">
+                <a 
+                  href={latestRelease.tracks[0].soundcloudUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
+                >
+                  SoundCloud
+                </a>
                 <a 
                   href={latestRelease.tracks[0].spotifyUrl} 
                   target="_blank" 
@@ -171,14 +178,6 @@ const LatestRelease = () => {
                   className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
                 >
                   Amazon
-                </a>
-                <a 
-                  href={latestRelease.tracks[0].soundcloudUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
-                >
-                  SoundCloud
                 </a>
               </div>
             </div>

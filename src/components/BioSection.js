@@ -7,7 +7,6 @@ const BioSection = () => {
   const [expanded, setExpanded] = useState(false);
   
   useEffect(() => {
-    const { gsap } = initializeGSAP();
     
     const section = sectionRef.current;
     const card = cardRef.current;

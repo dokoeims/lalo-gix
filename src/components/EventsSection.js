@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
+import { createScrollAnimation } from '../utils/initializeGSAP';
 
 // Placeholder events data
 const events = [
@@ -38,7 +38,6 @@ const EventsSection = () => {
   const eventsListRef = useRef(null);
   
   useEffect(() => {
-    const { gsap } = initializeGSAP();
     
     const section = sectionRef.current;
     const eventsList = eventsListRef.current;

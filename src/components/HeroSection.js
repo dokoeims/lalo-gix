@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { initializeGSAP } from '../utils/initializeGSAP';
-import HeroImage from '../assets/danos_causa_natural.jpg';
-import CircularProfileImage from '../assets/lalo_gix_pic.jpg';
-import AppleSVGLogo from '../assets/Apple_Music_Icon_wht_sm_073120.svg';
-import TidalSVGLogo from '../assets/icons8-tidal.svg';
-import AmazonMusicSVGLogo from '../assets/icons8-amazon-music.svg';
-import SoundCloudSVGLogo from '../assets/icons8-soundcloud-logo.svg';
-import SpotifySVGLogo from '../assets/icons8-spotify-logo.svg';
-import YoutubeSVGLogo from '../assets/icons8-youtube-music.svg';
+import HeroImage from '../assets/covers/danos_causa_natural.jpg';
+import CircularProfileImage from '../assets/artist_profile.jpg';
+import AppleSVGLogo from '../assets/streaming_icons/Apple_Music_Icon_wht_sm_073120.svg';
+import TidalSVGLogo from '../assets/streaming_icons/icons8-tidal.svg';
+import AmazonMusicSVGLogo from '../assets/streaming_icons/icons8-amazon-music.svg';
+import SoundCloudSVGLogo from '../assets/streaming_icons/icons8-soundcloud-logo.svg';
+import SpotifySVGLogo from '../assets/streaming_icons/icons8-spotify-logo.svg';
+import YoutubeSVGLogo from '../assets/streaming_icons/icons8-youtube-music.svg';
 
 const HeroSection = () => {
   const heroRef = useRef(null);
@@ -72,6 +72,14 @@ const HeroSection = () => {
       {/* Social Media Icons */}
       <div className="absolute top-20 right-2 sm:right-8 flex flex-col space-y-4 z-40">
         <a 
+          href="https://on.soundcloud.com/YrNvtUJVVFx6T1MCA" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="animate-hero w-10 h-10 rounded-full bg-white bg-opacity-10 backdrop-blur-sm flex items-center justify-center hover:bg-opacity-20 transition-all duration-300"
+        >
+          <img src={SoundCloudSVGLogo} alt="SoundCloud" className="w-5 h-5" />
+        </a>
+        <a 
           href="https://open.spotify.com/playlist/0rNqNAfvMJmgcFIf2K8p2v" 
           target="_blank" 
           rel="noopener noreferrer" 
@@ -112,14 +120,7 @@ const HeroSection = () => {
         >
           <img src={AmazonMusicSVGLogo} alt="Amazon Music" className="w-5 h-5" />
         </a>
-        <a 
-          href="https://on.soundcloud.com/YrNvtUJVVFx6T1MCA" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="animate-hero w-10 h-10 rounded-full bg-white bg-opacity-10 backdrop-blur-sm flex items-center justify-center hover:bg-opacity-20 transition-all duration-300"
-        >
-          <img src={SoundCloudSVGLogo} alt="SoundCloud" className="w-5 h-5" />
-        </a>
+        
         
       </div>
       
@@ -137,7 +138,7 @@ const HeroSection = () => {
         
         {/* Tagline */}
         <h2 className="animate-hero font-montserrat font-light text-lg md:text-2xl mb-12 tracking-wider">
-        SONIDOS IMPERFECTOS | MÚSICA CON LIBERTAD
+        LALO GIX - SONIDOS IMPERFECTOS
         </h2>
         
         {/* CTA Button */}
@@ -145,7 +146,7 @@ const HeroSection = () => {
           href="#latest-release" 
           className="animate-hero inline-block px-8 py-3 rounded-full bg-accent bg-opacity-10 border border-accent text-white hover:bg-opacity-20 transition-all duration-300"
         >
-          SENCILLO MÁS POPULAR
+          ESCUCHA LO MÁS POPULAR
         </a>
       </div>
     </section>

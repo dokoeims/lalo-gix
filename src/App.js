@@ -4,7 +4,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import SafeComponent from './components/SafeComponent';
 import Loading from './components/Loading';
 import HeroSection from './components/HeroSection';
-import { AudioProvider } from './utils/AudioContext';
+import { AudioProvider } from './contexts/AudioContext';
 import { initializeGSAP, createScrollAnimation } from './utils/initializeGSAP';
 import { shouldEnableAnimations, isMobile } from './utils/deviceDetection';
 

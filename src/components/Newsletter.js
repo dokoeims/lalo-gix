@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
+import { createScrollAnimation } from '../utils/initializeGSAP';
 
 const Newsletter = () => {
   const sectionRef = useRef(null);
@@ -10,7 +10,6 @@ const Newsletter = () => {
   const [error, setError] = useState('');
   
   useEffect(() => {
-    const { gsap } = initializeGSAP();
     
     const section = sectionRef.current;
     const form = formRef.current;

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
-import audioPlayer from './audioPlayer';
+import audioPlayer from '../utils/audioPlayer';
 
 // Create context
 const AudioContext = createContext();

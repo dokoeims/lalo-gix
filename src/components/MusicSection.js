@@ -1,75 +1,109 @@
 import React, { useRef, useEffect } from 'react';
 import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
-import { useAudio } from '../utils/AudioContext';
+import { useAudio } from '../contexts/AudioContext';
+import CantStopThisFeelingAudio from '../assets/audios/cant_stop_this_feeling.mp3';
+import TraslacionAudio from '../assets/audios/traslacion.mp3';
+import DanosCausaNaturalAudio from '../assets/audios/danos_causa_natural.mp3';
+import FalloCorazonAudio from '../assets/audios/fallo_corazon.mp3';
+import UnPoquitoMasAudio from '../assets/audios/un_poquito_mas.mp3';
+import ParsecAudio from '../assets/audios/parsec.mp3';
+import CantStopThisFeelingCover from '../assets/covers/cant_stop_this_feeling.jpg';
+import TraslacionCover from '../assets/covers/traslacion.jpg';
+import DanosCausaNaturalCover from '../assets/covers/danos_causa_natural.jpg';
+import FalloCorazonCover from '../assets/covers/fallo_corazon.jpg';
+import UnPoquitoMasCover from '../assets/covers/un_poquito_mas.jpg';
+import ParsecCover from '../assets/covers/parsec.jpg';
 
 // Placeholder album data
 const albums = [
   {
-    id: 1,
-    title: 'NEBULA DREAMS',
-    type: 'EP',
-    year: '2024',
-    coverImage: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6a3?q=80&w=2070',
-    tracks: [
-      { id: 101, title: 'Cosmic Journey', duration: '3:42', album: 'Nebula Dreams EP' },
-      { id: 102, title: 'Stellar Waves', duration: '4:15', album: 'Nebula Dreams EP' },
-      { id: 103, title: 'Nebula Drift', duration: '5:30', album: 'Nebula Dreams EP' },
-      { id: 104, title: 'Astral Projection', duration: '6:08', album: 'Nebula Dreams EP' }
-    ]
-  },
-  {
-    id: 2,
-    title: 'COSMIC ECHOES',
-    type: 'Album',
-    year: '2023',
-    coverImage: 'https://images.unsplash.com/photo-1614102073832-030967418971?q=80&w=2069',
-    tracks: [
-      { id: 201, title: 'Pulse Wave', duration: '4:20', album: 'Cosmic Echoes' },
-      { id: 202, title: 'Cosmic Resonance', duration: '3:55', album: 'Cosmic Echoes' }
-    ]
-  },
-  {
-    id: 3,
-    title: 'MIDNIGHT PULSE',
-    type: 'EP',
-    year: '2022',
-    coverImage: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?q=80&w=2070',
-    tracks: [
-      { id: 301, title: 'Midnight Glow', duration: '3:47', album: 'Midnight Pulse EP' },
-      { id: 302, title: 'Electric Dreams', duration: '4:32', album: 'Midnight Pulse EP' }
-    ]
-  },
-  {
-    id: 4,
-    title: 'DIGITAL DREAMS',
-    type: 'Single',
-    year: '2022',
-    coverImage: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=2070',
-    tracks: [
-      { id: 401, title: 'Digital Dreams', duration: '3:25', album: 'Digital Dreams Single' }
-    ]
-  },
-  {
-    id: 5,
-    title: 'LUNAR PHASE',
-    type: 'EP',
+    id: 102,
+    title: "CAN'T STOP THIS FEELING (GOING DOWN)",
+    type: 'SINGLE',
     year: '2021',
-    coverImage: 'https://images.unsplash.com/photo-1446057032654-9d8885db76c6?q=80&w=2148',
+    coverImage: CantStopThisFeelingCover,
     tracks: [
-      { id: 501, title: 'Lunar Orbit', duration: '5:12', album: 'Lunar Phase EP' },
-      { id: 502, title: 'Phase Shift', duration: '4:40', album: 'Lunar Phase EP' }
+      { 
+        id: 202, 
+        title: "Can't Stop This Feeling (Going Down)",
+        duration: '0:30', 
+        album: "Can't Stop This Feeling (Going Down) - Single",
+        audioUrl: CantStopThisFeelingAudio,
+        spotifyUrl: 'https://open.spotify.com/track/2R12hIKqax4p9pOVuYmEDQ',
+        appleMusicUrl: 'https://music.apple.com/mx/album/croak/1802811045?i=1802811046',
+        tidalUrl: 'https://tidal.com/browse/track/424566323',
+        youtubeMusicUrl: 'https://music.youtube.com/watch?v=MkxLJmHn-c4&si=x__jU7VhUuiDme9q',
+        amazonMusicUrl: 'https://music.amazon.com.mx/tracks/B0F1SDXWW3',
+        soundcloudUrl: 'https://soundcloud.com/lalo-gix/croak',
+      },
     ]
   },
   {
-    id: 6,
-    title: 'ELECTRIC SOUL',
-    type: 'Album',
-    year: '2020',
-    coverImage: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=2070',
+    id: 104,
+    title: 'DAÑOS CAUSA NATURAL',
+    type: 'SINGLE',
+    year: '2021',
+    coverImage: DanosCausaNaturalCover,
     tracks: [
-      { id: 601, title: 'Electric Soul', duration: '4:15', album: 'Electric Soul' },
-      { id: 602, title: 'Neon Lights', duration: '3:55', album: 'Electric Soul' }
+      { id: 204, title: 'Daños Causa Natural', duration: '0:30', album: 'Danos Causa Natural - Single', audioUrl: DanosCausaNaturalAudio,
+        spotifyUrl: 'https://open.spotify.com/track/2R12hIKqax4p9pOVuYmEDQ',
+        appleMusicUrl: 'https://music.apple.com/mx/album/croak/1802811045?i=1802811046',
+        tidalUrl: 'https://tidal.com/browse/track/424566323',
+        youtubeMusicUrl: 'https://music.youtube.com/watch?v=MkxLJmHn-c4&si=x__jU7VhUuiDme9q',
+        amazonMusicUrl: 'https://music.amazon.com.mx/tracks/B0F1SDXWW3',
+        soundcloudUrl: 'https://soundcloud.com/lalo-gix/croak',
+      },
+    ],
+  },
+  {
+    id: 105,
+    title: 'FALLO CORAZÓN',
+    type: 'SINGLE',
+    year: '2025',
+    coverImage: FalloCorazonCover,
+    tracks: [
+      { id: 205, title: 'Fallo Corazón', duration: '0:30', album: 'Fallo Corazón - Single', audioUrl: FalloCorazonAudio,
+      },
+    ],
+  },
+  {
+    id: 106,
+    title: 'UN POQUITO MÁS',
+    type: 'SINGLE',
+    year: '2025',
+    coverImage: UnPoquitoMasCover,
+    tracks: [
+      { id: 206, title: 'Un Poquito Más', duration: '0:30', album: 'Un Poquito Más - Single', audioUrl: UnPoquitoMasAudio,
+      },
+    ],
+  },
+  {
+    id: 103,
+    title: 'TRASLACIÓN',
+    type: 'SINGLE',
+    year: '2025',
+    coverImage: TraslacionCover,
+    tracks: [
+      { id: 203, title: 'Traslacion', duration: '0:30', album: 'Traslacion - Single', audioUrl: TraslacionAudio,
+        spotifyUrl: 'https://open.spotify.com/track/2R12hIKqax4p9pOVuYmEDQ',
+        appleMusicUrl: 'https://music.apple.com/mx/album/croak/1802811045?i=1802811046',
+        tidalUrl: 'https://tidal.com/browse/track/424566323',
+        youtubeMusicUrl: 'https://music.youtube.com/watch?v=MkxLJmHn-c4&si=x__jU7VhUuiDme9q',
+        amazonMusicUrl: 'https://music.amazon.com.mx/tracks/B0F1SDXWW3',
+        soundcloudUrl: 'https://soundcloud.com/lalo-gix/croak',
+      },
     ]
+  },
+  {
+    id: 107,
+    title: 'PARSEC',
+    type: 'SINGLE',
+    year: '2020',
+    coverImage: ParsecCover,
+    tracks: [
+      { id: 207, title: 'Parsec', duration: '0:30', album: 'Parsec - Single', audioUrl: ParsecAudio,
+      },
+    ],
   }
 ];
 
@@ -188,7 +222,7 @@ const MusicSection = () => {
       className="py-24 px-4 bg-gradient-to-b from-dark-bg to-light-bg"
     >
       <div className="container mx-auto">
-        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">MUSIC</h2>
+        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">MÚSICA</h2>
         
         {/* Audio Player */}
         <div 
@@ -221,7 +255,7 @@ const MusicSection = () => {
             {/* Track info */}
             <div>
               <p className="text-xs text-gray-400">
-                {currentTrack ? 'NOW PLAYING' : 'SELECT A TRACK'}
+                {currentTrack ? 'SONANDO AHORA' : 'SELECCIONA UNA CANCIÓN'}
               </p>
               <h3 className="text-lg font-semibold">
                 {currentTrack ? currentTrack.title : 'No track selected'}
@@ -271,7 +305,7 @@ const MusicSection = () => {
         </div>
         
         {/* Discography title */}
-        <h3 className="text-xl font-montserrat font-medium mb-8">DISCOGRAPHY</h3>
+        <h3 className="text-xl font-montserrat font-medium mb-8">DISCOGRAFÍA</h3>
         
         {/* Album grid */}
         <div 
