@@ -9,41 +9,44 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between mb-8">
           <div className="mb-8 md:mb-0">
             <a href="#" className="text-2xl font-bold font-montserrat">LALO GIX</a>
-            <p className="text-gray-500 mt-2">© {new Date().getFullYear()} Lalo Gix. All rights reserved.</p>
+            <p className="text-gray-400 mt-2 text-sm">Template React.js de código abierto para artistas musicales. <a href="https://github.com/dokoeims/lalo-gix" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent/80 transition-colors">Disponible en GitHub</a>.</p>
+            <p className="text-gray-500 mt-2">© {new Date().getFullYear()} Todos los derechos reservados.</p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-sm font-medium mb-4 uppercase tracking-wider">Connect</h3>
+              <h3 className="text-sm font-medium mb-4 uppercase tracking-wider">Conectar</h3>
               <ul className="space-y-2">
-                <li><a href="mailto:contact@lalogix.com" className="text-gray-400 hover:text-accent transition-colors">Email</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-accent transition-colors">Booking</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-accent transition-colors">Press Kit</a></li>
+                <li><a href="mailto:soy@lalogix.me" className="text-gray-400 hover:text-accent transition-colors">Email</a></li>
+                <li><a href="mailto:soy@lalogix.me" className="text-gray-400 hover:text-accent transition-colors">Booking</a></li>
+                <li><a href="mailto:soy@lalogix.me" className="text-gray-400 hover:text-accent transition-colors">Press Kit</a></li>
               </ul>
             </div>
             
             <div>
-              <h3 className="text-sm font-medium mb-4 uppercase tracking-wider">Music</h3>
+              <h3 className="text-sm font-medium mb-4 uppercase tracking-wider">Música</h3>
               <ul className="space-y-2">
-                <li><a href="https://spotify.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors">Spotify</a></li>
-                <li><a href="https://soundcloud.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors">SoundCloud</a></li>
-                <li><a href="https://music.apple.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors">Apple Music</a></li>
-                <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors">YouTube</a></li>
+                <li><a href="https://on.soundcloud.com/YrNvtUJVVFx6T1MCA" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors">SoundCloud</a></li>
+                <li><a href="https://open.spotify.com/playlist/0rNqNAfvMJmgcFIf2K8p2v" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors">Spotify</a></li>
+                <li><a href="https://music.apple.com/mx/artist/lalo-gix/1802348702" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors">Apple Music</a></li>
+                <li><a href="https://tidal.com/browse/playlist/05b3f02c-7c2b-4041-9c55-ee46e4d1f06e" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors">Tidal</a></li>
+                <li><a href="https://music.youtube.com/playlist?list=PLHIvrTlxasADGC6Eb55HBsM59pN-3v2sb&si=d6U8JX_RbJrmadUq" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors">YouTube Music</a></li>
+                <li><a href="https://music.amazon.com.mx/artists/B0F1KL7LL4" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-accent transition-colors">Amazon Music</a></li>
               </ul>
             </div>
             
             <div>
               <h3 className="text-sm font-medium mb-4 uppercase tracking-wider">Legal</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-accent transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-accent transition-colors">Terms of Use</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-accent transition-colors">Política de Privacidad</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-accent transition-colors">Términos de Uso</a></li>
               </ul>
             </div>
           </div>
         </div>
         
         <div className="flex justify-between items-center pt-8 border-t border-gray-800">
-          <p className="text-gray-500 text-sm">Created with love in Berlin</p>
+          <p className="text-gray-500 text-sm">Creado con amor en CDMX</p>
           
           <div className="flex space-x-4">
             <a 
@@ -89,7 +92,7 @@ const Footer = () => {
           <a 
             href="#" 
             className="w-10 h-10 rounded-full bg-accent bg-opacity-10 flex items-center justify-center hover:bg-opacity-20 transition-all duration-300"
-            aria-label="Back to top"
+            aria-label="Volver arriba"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="18 15 12 9 6 15"></polyline>
