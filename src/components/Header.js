@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ARTIST_INFO, NAVIGATION_LINKS } from '../config/artistConfig';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,14 +32,19 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="#" className="text-2xl font-bold font-montserrat">LALO GIX</a>
+        <a href="#" className="text-2xl font-bold font-montserrat">{ARTIST_INFO.name}</a>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#music" className="text-sm hover:text-accent transition-colors">MUSICA</a>
-          <a href="#bio" className="text-sm hover:text-accent transition-colors">BIOGRAFÍA</a>
-          <a href="#events" className="text-sm hover:text-accent transition-colors">EVENTOS</a>
-          <a href="#newsletter" className="text-sm hover:text-accent transition-colors">CONTACTO</a>
+          {NAVIGATION_LINKS.map(link => (
+            <a 
+              key={link.id} 
+              href={`#${link.id}`} 
+              className="text-sm hover:text-accent transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
         </nav>
         
         {/* Mobile Menu Button */}
@@ -72,34 +78,16 @@ const Header = () => {
       >
         <div className="container mx-auto px-4 py-4">
           <nav className="flex flex-col space-y-4">
-            <a 
-              href="#music" 
-              className="py-2 hover:text-accent transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              MUSIC
-            </a>
-            <a 
-              href="#bio" 
-              className="py-2 hover:text-accent transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              BIO
-            </a>
-            <a 
-              href="#events" 
-              className="py-2 hover:text-accent transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              EVENTS
-            </a>
-            <a 
-              href="#newsletter" 
-              className="py-2 hover:text-accent transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              CONTACT
-            </a>
+            {NAVIGATION_LINKS.map(link => (
+              <a 
+                key={link.id}
+                href={`#${link.id}`} 
+                className="py-2 hover:text-accent transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
         </div>
       </div>

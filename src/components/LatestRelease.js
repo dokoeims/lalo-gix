@@ -1,32 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { createScrollAnimation } from '../utils/initializeGSAP';
 import { useAudio } from '../contexts/AudioContext';
-import CroakCover from '../assets/covers/croak.jpg';
-import CroakAudio from '../assets/audios/croak.mp3';
-
-// Latest release data
-const latestRelease = {
-  title: 'CROAK',
-  type: 'SENCILLO',
-  releaseDate: 'Noviembre 2020',
-  coverImage: CroakCover,
-  description: 'Eran el dúo dinámico de la laguna, hasta que el amor se escurrió entre sus patas. Ahora, una salta sin mirar atrás, mientras la otra sigue atrapada en el lodo de los recuerdos. 🐸💔',
-  tracks: [
-    { 
-      id: 101, 
-      title: 'Croak', 
-      duration: '0:30', 
-      album: 'Croak - Single',
-      audioUrl: CroakAudio,
-      spotifyUrl: 'https://open.spotify.com/track/2R12hIKqax4p9pOVuYmEDQ',
-      appleMusicUrl: 'https://music.apple.com/mx/album/croak/1802811045?i=1802811046',
-      tidalUrl: 'https://tidal.com/browse/track/424566323',
-      youtubeMusicUrl: 'https://music.youtube.com/watch?v=MkxLJmHn-c4&si=x__jU7VhUuiDme9q',
-      amazonMusicUrl: 'https://music.amazon.com.mx/tracks/B0F1SDXWW3',
-      soundcloudUrl: 'https://soundcloud.com/lalo-gix/croak',
-    },
-  ]
-};
+import { LATEST_RELEASE, STREAMING_PLATFORMS } from '../config/artistConfig';
 
 const LatestRelease = () => {
   const sectionRef = useRef(null);
@@ -78,8 +53,8 @@ const LatestRelease = () => {
   
   // Play the first track from the release
   const handlePlay = () => {
-    if (latestRelease.tracks && latestRelease.tracks.length > 0) {
-      playTrack(latestRelease.tracks[0]);
+    if (LATEST_RELEASE.tracks && LATEST_RELEASE.tracks.length > 0) {
+      playTrack(LATEST_RELEASE.tracks[0]);
     }
   };
   
@@ -100,8 +75,8 @@ const LatestRelease = () => {
           {/* Album artwork */}
           <div className="animate-in flex-shrink-0 w-full md:w-64 h-64 bg-gray-800 rounded overflow-hidden">
             <img 
-              src={latestRelease.coverImage}
-              alt={latestRelease.title}
+              src={LATEST_RELEASE.coverImage}
+              alt={LATEST_RELEASE.title}
               className="w-full h-full object-cover object-top"
             />
           </div>
@@ -109,10 +84,10 @@ const LatestRelease = () => {
           {/* Album info */}
           <div className="flex-grow flex flex-col justify-between">
             <div>
-              <h3 className="animate-in text-2xl md:text-3xl font-montserrat font-bold mb-2">{latestRelease.title}</h3>
-              <p className="animate-in text-gray-400 mb-6">{latestRelease.type} • {latestRelease.releaseDate}</p>
+              <h3 className="animate-in text-2xl md:text-3xl font-montserrat font-bold mb-2">{LATEST_RELEASE.title}</h3>
+              <p className="animate-in text-gray-400 mb-6">{LATEST_RELEASE.type} • {LATEST_RELEASE.releaseDate}</p>
               <p className="animate-in text-gray-300 mb-8 max-w-lg">
-                {latestRelease.description}
+                {LATEST_RELEASE.description}
               </p>
             </div>
             
@@ -130,55 +105,17 @@ const LatestRelease = () => {
               
               {/* Streaming platform links */}
               <div className="animate-in flex flex-wrap gap-3">
-                <a 
-                  href={latestRelease.tracks[0].soundcloudUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
-                >
-                  SoundCloud
-                </a>
-                <a 
-                  href={latestRelease.tracks[0].spotifyUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
-                >
-                  Spotify
-                </a>
-                <a 
-                  href={latestRelease.tracks[0].appleMusicUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
-                >
-                  Apple
-                </a>
-                <a 
-                  href={latestRelease.tracks[0].tidalUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
-                >
-                  Tidal
-                </a>
-                
-                <a 
-                  href={latestRelease.tracks[0].youtubeMusicUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
-                >
-                  YouTube
-                </a>
-                <a 
-                  href={latestRelease.tracks[0].amazonMusicUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
-                >
-                  Amazon
-                </a>
+                {Object.values(STREAMING_PLATFORMS).map(platform => (
+                  <a 
+                    key={platform.name}
+                    href={LATEST_RELEASE.tracks[0][`${platform.name.toLowerCase().replace(' ', '')}Url`] || platform.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="px-4 py-2 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all duration-300 text-sm"
+                  >
+                    {platform.name.split(' ')[0]}
+                  </a>
+                ))}
               </div>
             </div>
           </div>

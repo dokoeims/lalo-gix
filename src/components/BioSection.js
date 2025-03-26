@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
+import { BIO, ARTIST_INFO } from '../config/artistConfig';
 
 const BioSection = () => {
   const sectionRef = useRef(null);
@@ -90,47 +91,20 @@ const BioSection = () => {
           ref={cardRef}
           className="glass-card p-8 max-w-4xl mx-auto"
         >
-          <p className="mb-6 leading-relaxed">
-            Lalo Gix, ingeniero de software de día y "productor musical" de noche, emerge como una 
-            figura reconocida en su sala de estar, donde crea música experimental cuando los bugs del código son demasiado obstinados y necesita desahogar sus frustraciones rítmicamente.
-          </p>
-          
-          <p className="mb-6 leading-relaxed">
-            Nunca ha ganado el prestigioso premio Grammy, ni el Billboard, ni siquiera una mención 
-            honorífica en el concurso de talentos local, principalmente porque nunca ha sido invitado 
-            a participar en ninguno de ellos. Su música resuena profundamente con sus más fieles seguidores: 
-            su novia, su familia, y ocasionalmente, su amigo Luis cuando logra pagar su suscripción a Spotify.
-
-          </p>
+          {BIO.shortBio.map((paragraph, index) => (
+            <p key={index} className="mb-6 leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
           
           <div ref={expandedContentRef} className={`overflow-hidden ${expanded ? '' : 'h-0 opacity-0'}`}>
-            <p className="mb-6 leading-relaxed">
-              Su próxima gira "Mi Casa Es Tu Casa Tour 2025" incluye presentaciones exclusivas en su sala, 
-              su cocina y, si el clima lo permite, en el patio trasero donde sus perros son el público más 
-              leal. Ellos nunca se pierden una sesión de estudio, demostrando que el verdadero talento se 
-              reconoce incluso entre especies.
-            </p>
-            
-            <p className="mb-6 leading-relaxed">
-              Con su MacBook desgastado y GarageBand como aliados, conectados heroicamente a un piano digital 
-              y un micrófono comprado en oferta, Lalo define lo que significa ser un artista independiente 
-              en el sentido más literal del término. Su estudio, situado estratégicamente entre la lavadora 
-              y el refrigerador, le proporciona la acústica perfecta para sus composiciones atmosféricas y 
-              el fácil acceso a refrigerios durante las largas sesiones nocturnas.
-            </p>
-            
-            <p className="mb-6 leading-relaxed">
-            Lalo Gix creó esta página web con la esperanza de que otros artistas independientes pudieran 
-              encontrarla útil como plantilla. El repositorio es código abierto en su <a href="https://github.com/dokoeims/lalo-gix" target="_blank" rel="noopener noreferrer" className='text-accent hover:text-accent/80 transition-colors duration-300'>GitHub</a>, porque 
-              compartir es vivir, especialmente cuando no se tienen contratos discográficos exclusivos que lo impidan.
-            </p>
-            <p className="mb-6 leading-relaxed">
-              A pesar de su falta de fama internacional o incluso reconocimiento en su vecindario, 
-              Lalo sigue dedicado a su arte, feliz de compartir su música con las personas que conoce 
-              y le importan. Porque al final del día, ¿no es eso lo que realmente importa? (Eso, y que 
-              los perros no ladren durante la grabación).
-            </p>
-
+            {BIO.fullBio.map((paragraph, index) => (
+              <p key={index} className="mb-6 leading-relaxed">
+                {paragraph.includes('GitHub') ? (
+                  <span dangerouslySetInnerHTML={{ __html: paragraph.replace('GitHub', `<a href="${ARTIST_INFO.githubRepo}" target="_blank" rel="noopener noreferrer" class='text-accent hover:text-accent/80 transition-colors duration-300'>GitHub</a>`) }} />
+                ) : paragraph}
+              </p>
+            ))}
           </div>
           
           <button 

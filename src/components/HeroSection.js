@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { initializeGSAP } from '../utils/initializeGSAP';
-import HeroImage from '../assets/covers/danos_causa_natural.jpg';
+import { ARTIST_INFO, HERO_SECTION } from '../config/artistConfig';
 import CircularProfileImage from '../assets/artist_profile.jpg';
 import AppleSVGLogo from '../assets/streaming_icons/Apple_Music_Icon_wht_sm_073120.svg';
 import TidalSVGLogo from '../assets/streaming_icons/icons8-tidal.svg';
@@ -63,8 +63,8 @@ const HeroSection = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-dark-bg/30 to-dark-bg"></div>
         <img 
-          src={HeroImage} 
-          alt="Lalo Gix performing"
+          src={HERO_SECTION.backgroundImage} 
+          alt={`${ARTIST_INFO.name} performing`}
           className="w-full h-full object-cover"
         />
       </div>

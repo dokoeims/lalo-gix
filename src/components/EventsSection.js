@@ -1,77 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { createScrollAnimation } from '../utils/initializeGSAP';
-
-// Calculate upcoming dates starting from today, spaced every 2-3 weeks
-const generateFutureDates = () => {
-  const currentDate = new Date();
-  const dates = [];
-  
-  // First event is today
-  const firstDate = new Date(currentDate);
-  dates.push(firstDate);
-  
-  // Second event is in 2 weeks
-  const secondDate = new Date(currentDate);
-  secondDate.setDate(currentDate.getDate() + 14);
-  dates.push(secondDate);
-  
-  // Third event is in 5 weeks (3 weeks after the second)
-  const thirdDate = new Date(currentDate);
-  thirdDate.setDate(currentDate.getDate() + 35);
-  dates.push(thirdDate);
-  
-  // Fourth event is in 8 weeks (3 weeks after the third)
-  const fourthDate = new Date(currentDate);
-  fourthDate.setDate(currentDate.getDate() + 56);
-  dates.push(fourthDate);
-  
-  return dates;
-};
-
-// Format date as "MMM DD" (e.g., "MAR 25")
-const formatDateForDisplay = (date) => {
-  const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-  return `${months[date.getMonth()]} ${date.getDate()}`;
-};
-
-// Generate event dates
-const eventDates = generateFutureDates();
-
-// Parody events data for "Mi Casa Es Tu Casa Tour"
-const events = [
-  {
-    id: 1,
-    date: formatDateForDisplay(eventDates[0]),
-    title: 'LIVING ROOM SESSIONS',
-    location: 'SALA DE ESTAR, ENTRE EL SOFÁ Y LA TV',
-    ticketLink: 'https://example.com/tickets',
-    note: 'Traer botana. Silencio durante las melodías contemplativas.'
-  },
-  {
-    id: 2,
-    date: formatDateForDisplay(eventDates[1]),
-    title: 'BATHROOM ACOUSTICS',
-    location: 'REGADERA PRINCIPAL, CON ECO NATURAL',
-    ticketLink: 'https://example.com/tickets',
-    note: 'Concierto especial con reverberación natural. Toallas incluidas.'
-  },
-  {
-    id: 3,
-    date: formatDateForDisplay(eventDates[2]),
-    title: 'KITCHEN BEATS & EATS',
-    location: 'COCINA, JUNTO AL REFRIGERADOR',
-    ticketLink: 'https://example.com/tickets',
-    note: 'Sesión acústica con aperitivos. No tocar la comida del artista.'
-  },
-  {
-    id: 4,
-    date: formatDateForDisplay(eventDates[3]),
-    title: 'BACKYARD FESTIVAL',
-    location: 'PATIO TRASERO, CLIMA PERMITIENDO',
-    ticketLink: 'https://example.com/tickets',
-    note: 'Se suspende en caso de lluvia o si los perros necesitan pasear.'
-  }
-];
+import { TOUR_NAME, EVENTS } from '../config/artistConfig';
 
 const EventsSection = () => {
   const sectionRef = useRef(null);
@@ -118,11 +47,11 @@ const EventsSection = () => {
       className="py-24 px-4"
     >
       <div className="container mx-auto">
-        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">MI CASA ES TU CASA TOUR 2025</h2>
+        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">{TOUR_NAME}</h2>
         
         {/* Events list */}
         <div ref={eventsListRef} className="max-w-4xl mx-auto">
-          {events.map(event => (
+          {EVENTS.map(event => (
             <div 
               key={event.id} 
               className="event-item bg-white bg-opacity-5 rounded-md p-6 mb-6 flex flex-col md:flex-row md:items-center md:justify-between hover:bg-opacity-10 transition-all duration-300"
