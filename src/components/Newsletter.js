@@ -45,12 +45,12 @@ const Newsletter = () => {
     
     // Basic validation
     if (!email.trim()) {
-      setError('Please enter your email address');
+      setError('Por favor, ingresa tu dirección de email');
       return;
     }
     
     if (!/\S+@\S+\.\S+/.test(email)) {
-      setError('Please enter a valid email address');
+      setError('Por favor, ingresa una dirección de email válida');
       return;
     }
     
@@ -72,21 +72,21 @@ const Newsletter = () => {
       className="py-24 px-4 bg-dark-bg"
     >
       <div className="container mx-auto max-w-3xl text-center">
-        <h2 className="animate-in text-2xl md:text-3xl font-montserrat font-bold mb-4">JOIN THE JOURNEY</h2>
+        <h2 className="animate-in text-2xl md:text-3xl font-montserrat font-bold mb-4">ÚNETE AL VIAJE</h2>
         <p className="animate-in text-gray-300 mb-12 max-w-2xl mx-auto">
-          Subscribe to get updates on new releases, upcoming shows, and exclusive content.
+          Suscríbete para recibir actualizaciones sobre nuevos lanzamientos, próximos eventos y contenido exclusivo.
         </p>
         
         {submitted ? (
           <div className="animate-in bg-accent bg-opacity-10 border border-accent rounded-lg p-6 mb-8">
-            <p className="text-white">Thank you for subscribing! You'll receive updates soon.</p>
+            <p className="text-white">¡Gracias por suscribirte! Pronto recibirás actualizaciones.</p>
           </div>
         ) : (
           <form ref={formRef} onSubmit={handleSubmit} className="relative max-w-md mx-auto">
             <div className="relative">
               <input
                 type="email"
-                placeholder="Your email address"
+                placeholder="Tu dirección de email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full py-4 px-6 pr-32 bg-white bg-opacity-5 border border-gray-700 focus:border-accent rounded-full text-white outline-none transition-all duration-300"
@@ -95,7 +95,7 @@ const Newsletter = () => {
                 type="submit"
                 className="absolute right-1 top-1 bottom-1 px-6 bg-accent bg-opacity-20 hover:bg-opacity-30 border border-accent rounded-full transition-all duration-300"
               >
-                JOIN
+                UNIRSE
               </button>
             </div>
             {error && (
@@ -105,8 +105,7 @@ const Newsletter = () => {
         )}
         
         <p className="animate-in text-gray-500 text-sm mt-8">
-          By subscribing, you agree to receive emails from Lalo Gix. 
-          Your information will never be shared with third parties.
+          Este es solamente un formulario de prueba. Tu información nunca será compartida con terceros, ni siquiera con Lalo Gix.
         </p>
       </div>
     </section>
