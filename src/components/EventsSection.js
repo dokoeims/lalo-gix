@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createScrollAnimation } from '../utils/initializeGSAP';
-import { TOUR_NAME, EVENTS } from '../config/artistConfig';
+import { EVENTS } from '../config/artistConfig';
 
 const EventsSection = () => {
   const { t } = useTranslation();

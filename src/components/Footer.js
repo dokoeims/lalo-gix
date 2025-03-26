@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ARTIST_INFO, STREAMING_PLATFORMS, SOCIAL_MEDIA } from '../config/artistConfig';

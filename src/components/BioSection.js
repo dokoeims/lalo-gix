@@ -4,7 +4,7 @@ import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
 import { ARTIST_INFO } from '../config/artistConfig';
 
 const BioSection = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const cardRef = useRef(null);
   const [expanded, setExpanded] = useState(false);

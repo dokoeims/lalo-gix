@@ -63,4 +63,6 @@ export const createScrollAnimation = (element, fromVars, toVars, triggerOptions 
   }
 };
 
-export default { initializeGSAP, createScrollAnimation };
+const gsapUtils = { initializeGSAP, createScrollAnimation };
+
+export default gsapUtils;

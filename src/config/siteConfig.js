@@ -42,8 +42,10 @@ export const SOCIAL_LINKS = {
   youtube: 'https://youtube.com',
 };
 
-export default {
+const siteConfig = {
   ARTIST,
   BIO,
   SOCIAL_LINKS,
 };
+
+export default siteConfig;

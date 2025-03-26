@@ -347,7 +347,7 @@ export const THEME = {
   secondaryFont: 'Inter, sans-serif'
 };
 
-export default {
+const config = {
   ARTIST_INFO,
   SOCIAL_MEDIA,
   STREAMING_PLATFORMS,
@@ -360,3 +360,5 @@ export default {
   NAVIGATION_LINKS,
   THEME
 };
+
+export default config;
