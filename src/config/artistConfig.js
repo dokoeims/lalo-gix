@@ -94,7 +94,8 @@ export const STREAMING_PLATFORMS = {
 // Hero section configuration
 export const HERO_SECTION = {
   backgroundImage: HeroImage,
-  profileImage: CircularProfileImage
+  profileImage: CircularProfileImage,
+  ctaText: "ESCUCHA LO MÁS POPULAR"
 };
 
 // Featured release (latest release)
