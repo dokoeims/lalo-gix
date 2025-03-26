@@ -88,6 +88,13 @@ export const AudioProvider = ({ children }) => {
   const stopPlayback = useCallback(() => {
     try {
       audioPlayer.stop();
+      // Reset current track state to hide the mini player
+      setCurrentTrack(null);
+      setProgress(0);
+      setCurrentTime(0);
+      setDuration(0);
+      setRemainingTime(null);
+      setIsFading(false);
     } catch (error) {
       console.error('Error stopping playback:', error);
     }

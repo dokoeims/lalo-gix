@@ -66,6 +66,7 @@ class AudioPlayer {
       },
       onstop: () => {
         this.isPlaying = false;
+        this.currentTrack = null;
         if (this.onStopCallback) this.onStopCallback();
         this._stopProgressTimer();
         this._stopEndDetectionTimer();
@@ -121,6 +122,7 @@ class AudioPlayer {
       this.sound.stop();
       this.sound.unload();
       this.sound = null;
+      this.currentTrack = null; // Clear the current track reference
     } catch (error) {
       console.error('Error stopping sound:', error);
     }
