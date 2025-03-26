@@ -1,9 +1,11 @@
 import React, { useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { createScrollAnimation } from '../utils/initializeGSAP';
 import { useAudio } from '../contexts/AudioContext';
 import { LATEST_RELEASE, STREAMING_PLATFORMS } from '../config/artistConfig';
 
 const LatestRelease = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const cardRef = useRef(null);
   
@@ -65,7 +67,7 @@ const LatestRelease = () => {
       className="py-24 px-4 relative"
     >
       <div className="container mx-auto">
-        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">SENCILLO MÁS POPULAR</h2>
+        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">{t('latestRelease.title')}</h2>
         
         {/* Glass card */}
         <div 
@@ -85,9 +87,9 @@ const LatestRelease = () => {
           <div className="flex-grow flex flex-col justify-between">
             <div>
               <h3 className="animate-in text-2xl md:text-3xl font-montserrat font-bold mb-2">{LATEST_RELEASE.title}</h3>
-              <p className="animate-in text-gray-400 mb-6">{LATEST_RELEASE.type} • {LATEST_RELEASE.releaseDate}</p>
+              <p className="animate-in text-gray-400 mb-6">{t('latestRelease.releaseType')} • {t('latestRelease.releaseDate')}</p>
               <p className="animate-in text-gray-300 mb-8 max-w-lg">
-                {LATEST_RELEASE.description}
+                {t('latestRelease.description')}
               </p>
             </div>
             
@@ -95,7 +97,7 @@ const LatestRelease = () => {
               {/* Play button */}
               <button 
                 className="animate-in flex items-center justify-center w-12 h-12 rounded-full bg-accent bg-opacity-20 border border-accent hover:bg-opacity-30 transition-all duration-300"
-                aria-label="Play Nebula Dreams"
+                aria-label="Play track"
                 onClick={handlePlay}
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">

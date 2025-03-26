@@ -1,9 +1,11 @@
 import React, { useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
 import { useAudio } from '../contexts/AudioContext';
 import { ALBUMS } from '../config/artistConfig';
 
 const MusicSection = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const playerRef = useRef(null);
   const albumGridRef = useRef(null);
@@ -120,7 +122,7 @@ const MusicSection = () => {
       className="py-24 px-4 bg-gradient-to-b from-dark-bg to-light-bg"
     >
       <div className="container mx-auto">
-        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">MÚSICA</h2>
+        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">{t('musicSection.title')}</h2>
         
         {/* Audio Player */}
         <div 
@@ -155,23 +157,23 @@ const MusicSection = () => {
               <p className="text-xs text-gray-400">
                 {currentTrack 
                   ? (isFading 
-                      ? 'BAJANDO VOLUMEN' 
+                      ? t('latestRelease.fading')
                       : (remainingTime && remainingTime <= 8 && remainingTime > 5 && !isFading
-                          ? 'FINALIZANDO PRONTO' 
-                          : 'SONANDO AHORA')
+                          ? t('latestRelease.endingSoon')
+                          : t('latestRelease.playNow'))
                     )
-                  : 'SELECCIONA UNA CANCIÓN'
+                  : t('latestRelease.selectTrack')
                 }
               </p>
               <h3 className="text-lg font-semibold flex items-center gap-2">
-                {currentTrack ? currentTrack.title : 'No track selected'}
+                {currentTrack ? currentTrack.title : t('musicSection.noTrackSelected')}
                 {isFading ? (
                   <span className="text-xs text-accent bg-accent bg-opacity-10 px-2 py-1 rounded-full animate-pulse">
-                    Fade out
+                    {t('latestRelease.fading')}
                   </span>
                 ) : remainingTime && remainingTime <= 8 && remainingTime > 5 && !isFading ? (
                   <span className="text-xs text-yellow-400 bg-yellow-400 bg-opacity-10 px-2 py-1 rounded-full">
-                    Ending soon
+                    {t('latestRelease.endingSoon')}
                   </span>
                 ) : null}
               </h3>
@@ -234,7 +236,7 @@ const MusicSection = () => {
         </div>
         
         {/* Discography title */}
-        <h3 className="text-xl font-montserrat font-medium mb-8">DISCOGRAFÍA</h3>
+        <h3 className="text-xl font-montserrat font-medium mb-8">{t('musicSection.discography')}</h3>
         
         {/* Album grid */}
         <div 
@@ -262,7 +264,7 @@ const MusicSection = () => {
                 </div>
               </div>
               <h4 className="text-lg font-medium text-center">{album.title}</h4>
-              <p className="text-sm text-gray-400 text-center">{album.type} • {album.year}</p>
+              <p className="text-sm text-gray-400 text-center">{t('musicSection.single')} • {album.year}</p>
             </div>
           ))}
         </div>

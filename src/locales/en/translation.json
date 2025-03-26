@@ -1,0 +1,111 @@
+{
+  "header": {
+    "music": "MUSIC",
+    "bio": "BIO",
+    "events": "EVENTS",
+    "contact": "CONTACT"
+  },
+  "heroSection": {
+    "tagline": "LALO GIX - IMPERFECT SOUNDS",
+    "cta": "LISTEN TO THE MOST POPULAR"
+  },
+  "latestRelease": {
+    "title": "MOST POPULAR SINGLE",
+    "releaseType": "SINGLE",
+    "releaseDate": "November 2020",
+    "playNow": "NOW PLAYING",
+    "selectTrack": "SELECT A SONG",
+    "fading": "FADING OUT",
+    "endingSoon": "ENDING SOON",
+    "join": "JOIN",
+    "description": "They were the dynamic duo of the lagoon, until love slipped between their paws. Now, one jumps without looking back, while the other remains trapped in the mud of memories. 🐸💔"
+  },
+  "musicSection": {
+    "title": "MUSIC",
+    "discography": "DISCOGRAPHY",
+    "single": "SINGLE",
+    "noTrackSelected": "No track selected"
+  },
+  "bioSection": {
+    "title": "ABOUT LALO GIX",
+    "readMore": "READ MORE",
+    "readLess": "READ LESS",
+    "content": {
+      "p1": "Lalo Gix, software engineer by day and \"music producer\" by night, emerges as a recognized figure in his living room, where he creates experimental music when code bugs are too stubborn and he needs to vent his frustrations rhythmically.",
+      "p2": "He has never won the prestigious Grammy award, nor the Billboard, not even an honorable mention in the local talent contest, mainly because he has never been invited to participate in any of them. His music resonates deeply with his most loyal followers: his girlfriend, his family, and occasionally, his friend Luis when he manages to pay for his Spotify subscription.",
+      "p3": "His upcoming \"Mi Casa Es Tu Casa Tour 2025\" includes exclusive performances in his living room, kitchen, and, weather permitting, in the backyard where his dogs are the most loyal audience. They never miss a studio session, proving that true talent is recognized even across species.",
+      "p4": "With his worn MacBook and GarageBand as allies, heroically connected to a digital piano and a microphone bought on sale, Lalo defines what it means to be an independent artist in the most literal sense. His studio, strategically situated between the washing machine and the refrigerator, provides him with the perfect acoustics for his atmospheric compositions and easy access to snacks during long night sessions.",
+      "p5": "Lalo Gix created this website hoping that other independent artists might find it useful as a template. The repository is open source on his",
+      "p6": "Despite his lack of international fame or even recognition in his neighborhood, Lalo remains dedicated to his art, happy to share his music with the people he knows and cares about. Because at the end of the day, isn't that what really matters? (That, and the dogs not barking during recording)."
+    }
+  },
+  "eventsSection": {
+    "title": "MI CASA ES TU CASA TOUR 2025",
+    "buyTickets": "BUY TICKETS",
+    "events": {
+      "livingRoom": {
+        "title": "LIVING ROOM SESSIONS",
+        "location": "LIVING ROOM, BETWEEN SOFA AND TV",
+        "note": "Bring snacks. Silence during contemplative melodies."
+      },
+      "bathroom": {
+        "title": "BATHROOM ACOUSTICS",
+        "location": "MAIN SHOWER, WITH NATURAL ECHO",
+        "note": "Special concert with natural reverb. Towels included."
+      },
+      "kitchen": {
+        "title": "KITCHEN BEATS & EATS",
+        "location": "KITCHEN, NEXT TO THE FRIDGE",
+        "note": "Acoustic session with appetizers. Don't touch the artist's food."
+      },
+      "backyard": {
+        "title": "BACKYARD FESTIVAL",
+        "location": "BACKYARD, WEATHER PERMITTING",
+        "note": "Suspended in case of rain or if dogs need to go for a walk."
+      }
+    }
+  },
+  "newsletterSection": {
+    "title": "JOIN THE JOURNEY",
+    "description": "Subscribe to receive updates about new releases, upcoming events, and exclusive content.",
+    "placeholder": "Your email address",
+    "button": "JOIN",
+    "success": "Thanks for subscribing! You'll receive updates soon.",
+    "disclaimer": "This is just a test form. Your information will never be shared with third parties, not even with Lalo Gix.",
+    "validation": {
+      "required": "Please enter your email address",
+      "invalid": "Please enter a valid email address"
+    }
+  },
+  "footer": {
+    "description": "Open source React.js template for music artists.",
+    "rights": "All rights reserved.",
+    "madeWith": "Made with love in Mexico City",
+    "sections": {
+      "connect": {
+        "title": "Connect",
+        "email": "Email",
+        "booking": "Booking",
+        "pressKit": "Press Kit"
+      },
+      "music": {
+        "title": "Music"
+      },
+      "legal": {
+        "title": "Legal",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Use"
+      }
+    },
+    "backToTop": "Back to top",
+    "githubAvailable": "Available on GitHub"
+  },
+  "loading": {
+    "title": "LOADING MUSIC",
+    "description": "Please wait a moment..."
+  },
+  "language": {
+    "en": "EN",
+    "es": "ES"
+  }
+}

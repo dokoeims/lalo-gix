@@ -1,7 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ARTIST_INFO, STREAMING_PLATFORMS, SOCIAL_MEDIA } from '../config/artistConfig';
 
 const Footer = () => {
+  const { t } = useTranslation();
+  
   return (
     <footer className="bg-darker-bg py-12 px-4">
       <div className="container mx-auto">
@@ -10,22 +13,22 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between mb-8">
           <div className="mb-8 md:mb-0">
             <a href="#" className="text-2xl font-bold font-montserrat">LALO GIX</a>
-            <p className="text-gray-400 mt-2 text-sm">Template React.js de código abierto para artistas musicales. <a href="https://github.com/dokoeims/lalo-gix" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent/80 transition-colors">Disponible en GitHub</a>.</p>
-            <p className="text-gray-500 mt-2">© {new Date().getFullYear()} Todos los derechos reservados.</p>
+            <p className="text-gray-400 mt-2 text-sm">{t('footer.description')} <a href="https://github.com/dokoeims/lalo-gix" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent/80 transition-colors">{t('footer.githubAvailable')}</a>.</p>
+            <p className="text-gray-500 mt-2">© {new Date().getFullYear()} {t('footer.rights')}</p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-sm font-medium mb-4 uppercase tracking-wider">Conectar</h3>
+              <h3 className="text-sm font-medium mb-4 uppercase tracking-wider">{t('footer.sections.connect.title')}</h3>
               <ul className="space-y-2">
-                <li><a href={`mailto:${ARTIST_INFO.email}`} className="text-gray-400 hover:text-accent transition-colors">Email</a></li>
-                <li><a href={`mailto:${ARTIST_INFO.bookingEmail}`} className="text-gray-400 hover:text-accent transition-colors">Booking</a></li>
-                <li><a href={`mailto:${ARTIST_INFO.pressEmail}`} className="text-gray-400 hover:text-accent transition-colors">Press Kit</a></li>
+                <li><a href={`mailto:${ARTIST_INFO.email}`} className="text-gray-400 hover:text-accent transition-colors">{t('footer.sections.connect.email')}</a></li>
+                <li><a href={`mailto:${ARTIST_INFO.bookingEmail}`} className="text-gray-400 hover:text-accent transition-colors">{t('footer.sections.connect.booking')}</a></li>
+                <li><a href={`mailto:${ARTIST_INFO.pressEmail}`} className="text-gray-400 hover:text-accent transition-colors">{t('footer.sections.connect.pressKit')}</a></li>
               </ul>
             </div>
             
             <div>
-              <h3 className="text-sm font-medium mb-4 uppercase tracking-wider">Música</h3>
+              <h3 className="text-sm font-medium mb-4 uppercase tracking-wider">{t('footer.sections.music.title')}</h3>
               <ul className="space-y-2">
                 {Object.values(STREAMING_PLATFORMS).map(platform => (
                   <li key={platform.name}>
@@ -43,17 +46,17 @@ const Footer = () => {
             </div>
             
             <div>
-              <h3 className="text-sm font-medium mb-4 uppercase tracking-wider">Legal</h3>
+              <h3 className="text-sm font-medium mb-4 uppercase tracking-wider">{t('footer.sections.legal.title')}</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-accent transition-colors">Política de Privacidad</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-accent transition-colors">Términos de Uso</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-accent transition-colors">{t('footer.sections.legal.privacy')}</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-accent transition-colors">{t('footer.sections.legal.terms')}</a></li>
               </ul>
             </div>
           </div>
         </div>
         
         <div className="flex justify-between items-center pt-8 border-t border-gray-800">
-          <p className="text-gray-500 text-sm">Creado con amor en CDMX</p>
+          <p className="text-gray-500 text-sm">{t('footer.madeWith')}</p>
           
           <div className="flex space-x-4">
             {Object.entries(SOCIAL_MEDIA).map(([platform, url]) => (
@@ -92,7 +95,7 @@ const Footer = () => {
           <a 
             href="#" 
             className="w-10 h-10 rounded-full bg-accent bg-opacity-10 flex items-center justify-center hover:bg-opacity-20 transition-all duration-300"
-            aria-label="Volver arriba"
+            aria-label={t('footer.backToTop')}
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="18 15 12 9 6 15"></polyline>

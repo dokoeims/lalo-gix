@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAudio } from '../contexts/AudioContext';
 import { gsap } from 'gsap';
 
 const MiniPlayer = () => {
+  const { t } = useTranslation();
   const { 
     currentTrack, 
     isPlaying, 
@@ -65,9 +67,9 @@ const MiniPlayer = () => {
             <div className="flex items-center gap-2">
               <p className="font-medium text-sm">{currentTrack.title}</p>
               {isFading ? (
-                <span className="text-xs text-accent bg-accent bg-opacity-10 px-2 py-1 rounded-full animate-pulse fade-text-in">Fading out</span>
+                <span className="text-xs text-accent bg-accent bg-opacity-10 px-2 py-1 rounded-full animate-pulse fade-text-in">{t('latestRelease.fading')}</span>
               ) : remainingTime && remainingTime <= 8 && remainingTime > 5 && !isFading ? (
-                <span className="text-xs text-yellow-400 bg-yellow-400 bg-opacity-10 px-2 py-1 rounded-full fade-text-in">Ending soon</span>
+                <span className="text-xs text-yellow-400 bg-yellow-400 bg-opacity-10 px-2 py-1 rounded-full fade-text-in">{t('latestRelease.endingSoon')}</span>
               ) : null}
             </div>
             <p className="text-gray-400 text-xs">{currentTrack.album}</p>

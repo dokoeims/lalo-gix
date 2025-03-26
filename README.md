@@ -8,6 +8,7 @@ Un sitio web moderno e interactivo para artistas musicales con un diseño respon
 - **Diseño responsive**: Adaptado para dispositivos móviles, tablets y escritorio
 - **Componentes visuales modernos**: Efectos de glass morphism, animaciones suaves, transiciones
 - **Reproductor de audio integrado**: Incluye visualización de onda y control de reproducción
+- **Soporte multilingüe**: Internacionalización completa con soporte para español e inglés
 - **Optimizado para SEO**: Estructura semántica y metadatos correctamente implementados
 - **Accesibilidad mejorada**: Controles accesibles y compatibilidad con lectores de pantalla
 - **Integración con plataformas de streaming**: Enlaces a Spotify, Apple Music, etc.
@@ -44,6 +45,7 @@ El archivo centraliza la siguiente información:
 - Tailwind CSS
 - GSAP (GreenSock Animation Platform)
 - Howler.js para manejo de audio
+- i18next para internacionalización
 
 ## Primeros Pasos
 
@@ -191,6 +193,25 @@ Esto creará una versión optimizada para producción en la carpeta `build` que 
 - GitHub Pages
 - Amazon S3
 - Firebase Hosting
+
+## Internacionalización (i18n)
+
+Este proyecto incluye soporte completo para múltiples idiomas usando la biblioteca i18next. Para más detalles, consulta el archivo [i18n-README.md](i18n-README.md).
+
+### Idiomas soportados actualmente
+
+- Español
+- Inglés
+
+### Cómo funciona
+
+1. **Detección automática**: El sitio detecta automáticamente el idioma preferido del navegador del usuario
+2. **Cambio manual**: Un selector en la navegación permite cambiar entre idiomas disponibles
+3. **Persistencia**: El idioma seleccionado se guarda para futuras visitas
+
+### Añadir un nuevo idioma
+
+Consulta [i18n-README.md](i18n-README.md) para instrucciones detalladas sobre cómo añadir soporte para nuevos idiomas.
 
 ## Licencia
 

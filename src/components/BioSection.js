@@ -1,14 +1,15 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { initializeGSAP, createScrollAnimation } from '../utils/initializeGSAP';
-import { BIO, ARTIST_INFO } from '../config/artistConfig';
+import { ARTIST_INFO } from '../config/artistConfig';
 
 const BioSection = () => {
+  const { t, i18n } = useTranslation();
   const sectionRef = useRef(null);
   const cardRef = useRef(null);
   const [expanded, setExpanded] = useState(false);
   
   useEffect(() => {
-    
     const section = sectionRef.current;
     const card = cardRef.current;
     
@@ -84,34 +85,44 @@ const BioSection = () => {
       className="py-24 px-4 bg-gradient-to-b from-light-bg to-dark-bg"
     >
       <div className="container mx-auto">
-        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">ACERCA DE LALO GIX</h2>
+        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">{t('bioSection.title')}</h2>
         
         {/* Bio content with glass card */}
         <div 
           ref={cardRef}
           className="glass-card p-8 max-w-4xl mx-auto"
         >
-          {BIO.shortBio.map((paragraph, index) => (
-            <p key={index} className="mb-6 leading-relaxed">
-              {paragraph}
-            </p>
-          ))}
+          <p className="mb-6 leading-relaxed">
+            {t('bioSection.content.p1')}
+          </p>
+          
+          <p className="mb-6 leading-relaxed">
+            {t('bioSection.content.p2')}
+          </p>
           
           <div ref={expandedContentRef} className={`overflow-hidden ${expanded ? '' : 'h-0 opacity-0'}`}>
-            {BIO.fullBio.map((paragraph, index) => (
-              <p key={index} className="mb-6 leading-relaxed">
-                {paragraph.includes('GitHub') ? (
-                  <span dangerouslySetInnerHTML={{ __html: paragraph.replace('GitHub', `<a href="${ARTIST_INFO.githubRepo}" target="_blank" rel="noopener noreferrer" class='text-accent hover:text-accent/80 transition-colors duration-300'>GitHub</a>`) }} />
-                ) : paragraph}
-              </p>
-            ))}
+            <p className="mb-6 leading-relaxed">
+              {t('bioSection.content.p3')}
+            </p>
+            
+            <p className="mb-6 leading-relaxed">
+              {t('bioSection.content.p4')}
+            </p>
+            
+            <p className="mb-6 leading-relaxed">
+              {t('bioSection.content.p5')} <a href={ARTIST_INFO.githubRepo} target="_blank" rel="noopener noreferrer" className='text-accent hover:text-accent/80 transition-colors duration-300'>GitHub</a>.
+            </p>
+            
+            <p className="mb-6 leading-relaxed">
+              {t('bioSection.content.p6')}
+            </p>
           </div>
           
           <button 
             onClick={toggleExpanded}
             className="text-accent hover:text-accent/80 transition-colors duration-300 flex items-center mt-2"
           >
-            {expanded ? 'LEER MENOS' : 'LEER MÁS'}
+            {expanded ? t('bioSection.readLess') : t('bioSection.readMore')}
             <svg 
               className={`ml-1 w-4 h-4 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`} 
               viewBox="0 0 24 24" 

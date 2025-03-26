@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { initializeGSAP } from '../utils/initializeGSAP';
 import { ARTIST_INFO, HERO_SECTION, STREAMING_PLATFORMS } from '../config/artistConfig';
 
 const HeroSection = () => {
+  const { t } = useTranslation();
   const heroRef = useRef(null);
   const imageRef = useRef(null);
   
@@ -91,7 +93,7 @@ const HeroSection = () => {
         
         {/* Tagline */}
         <h2 className="animate-hero font-montserrat font-light text-lg md:text-2xl mb-12 tracking-wider">
-          {ARTIST_INFO.name} - {ARTIST_INFO.tagline}
+          {t('heroSection.tagline')}
         </h2>
         
         {/* CTA Button */}
@@ -99,7 +101,7 @@ const HeroSection = () => {
           href="#latest-release" 
           className="animate-hero inline-block px-8 py-3 rounded-full bg-accent bg-opacity-10 border border-accent text-white hover:bg-opacity-20 transition-all duration-300"
         >
-          {HERO_SECTION.ctaText}
+          {t('heroSection.cta')}
         </a>
       </div>
     </section>

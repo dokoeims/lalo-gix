@@ -1,8 +1,10 @@
 import React, { useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { createScrollAnimation } from '../utils/initializeGSAP';
 import { TOUR_NAME, EVENTS } from '../config/artistConfig';
 
 const EventsSection = () => {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const eventsListRef = useRef(null);
   
@@ -40,6 +42,14 @@ const EventsSection = () => {
     }
   }, []);
   
+  // Dictionary to map event IDs to translation keys
+  const eventTranslationMap = {
+    1: 'livingRoom',
+    2: 'bathroom',
+    3: 'kitchen',
+    4: 'backyard'
+  };
+  
   return (
     <section 
       id="events" 
@@ -47,7 +57,7 @@ const EventsSection = () => {
       className="py-24 px-4"
     >
       <div className="container mx-auto">
-        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">{TOUR_NAME}</h2>
+        <h2 className="text-2xl md:text-3xl font-montserrat font-bold mb-12">{t('eventsSection.title')}</h2>
         
         {/* Events list */}
         <div ref={eventsListRef} className="max-w-4xl mx-auto">
@@ -61,9 +71,15 @@ const EventsSection = () => {
                   {event.date}
                 </div>
                 <div>
-                  <h3 className="text-lg md:text-xl font-semibold mb-1">{event.title}</h3>
-                  <p className="text-gray-400">{event.location}</p>
-                  <p className="text-gray-500 text-sm mt-1 italic">{event.note}</p>
+                  <h3 className="text-lg md:text-xl font-semibold mb-1">
+                    {t(`eventsSection.events.${eventTranslationMap[event.id]}.title`)}
+                  </h3>
+                  <p className="text-gray-400">
+                    {t(`eventsSection.events.${eventTranslationMap[event.id]}.location`)}
+                  </p>
+                  <p className="text-gray-500 text-sm mt-1 italic">
+                    {t(`eventsSection.events.${eventTranslationMap[event.id]}.note`)}
+                  </p>
                 </div>
               </div>
               
@@ -73,7 +89,7 @@ const EventsSection = () => {
                 rel="noopener noreferrer" 
                 className="inline-block px-6 py-2 bg-accent bg-opacity-20 border border-accent rounded-full text-white hover:bg-opacity-30 transition-all duration-300 text-center md:text-left"
               >
-                COMPRAR ENTRADAS
+                {t('eventsSection.buyTickets')}
               </a>
             </div>
           ))}

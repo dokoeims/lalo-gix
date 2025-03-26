@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { ARTIST_INFO, NAVIGATION_LINKS } from '../config/artistConfig';
+import { useTranslation } from 'react-i18next';
+import { ARTIST_INFO } from '../config/artistConfig';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Header = () => {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -25,6 +28,14 @@ const Header = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  // Navigation links with translations
+  const navigationLinks = [
+    { id: 'music', label: t('header.music') },
+    { id: 'bio', label: t('header.bio') },
+    { id: 'events', label: t('header.events') },
+    { id: 'newsletter', label: t('header.contact') }
+  ];
+
   return (
     <header 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -36,7 +47,7 @@ const Header = () => {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          {NAVIGATION_LINKS.map(link => (
+          {navigationLinks.map(link => (
             <a 
               key={link.id} 
               href={`#${link.id}`} 
@@ -45,6 +56,7 @@ const Header = () => {
               {link.label}
             </a>
           ))}
+          <LanguageSwitcher />
         </nav>
         
         {/* Mobile Menu Button */}
@@ -78,7 +90,7 @@ const Header = () => {
       >
         <div className="container mx-auto px-4 py-4">
           <nav className="flex flex-col space-y-4">
-            {NAVIGATION_LINKS.map(link => (
+            {navigationLinks.map(link => (
               <a 
                 key={link.id}
                 href={`#${link.id}`} 
@@ -88,6 +100,9 @@ const Header = () => {
                 {link.label}
               </a>
             ))}
+            <div className="py-2">
+              <LanguageSwitcher />
+            </div>
           </nav>
         </div>
       </div>
