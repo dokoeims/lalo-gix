@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import fade animations */
+@import './utils/fadeAnimations.css';
+
 body {
   @apply bg-dark-bg text-white font-inter;
   margin: 0;

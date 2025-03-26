@@ -6,9 +6,11 @@ const MiniPlayer = () => {
   const { 
     currentTrack, 
     isPlaying, 
+    isFading,
     progress, 
     formatTime, 
     currentTime, 
+    remainingTime,
     togglePlayPause,
     stopPlayback
   } = useAudio();
@@ -60,7 +62,14 @@ const MiniPlayer = () => {
           </button>
           
           <div>
-            <p className="font-medium text-sm">{currentTrack.title}</p>
+            <div className="flex items-center gap-2">
+              <p className="font-medium text-sm">{currentTrack.title}</p>
+              {isFading ? (
+                <span className="text-xs text-accent bg-accent bg-opacity-10 px-2 py-1 rounded-full animate-pulse fade-text-in">Fading out</span>
+              ) : remainingTime && remainingTime <= 8 && remainingTime > 5 && !isFading ? (
+                <span className="text-xs text-yellow-400 bg-yellow-400 bg-opacity-10 px-2 py-1 rounded-full fade-text-in">Ending soon</span>
+              ) : null}
+            </div>
             <p className="text-gray-400 text-xs">{currentTrack.album}</p>
           </div>
         </div>
@@ -69,7 +78,13 @@ const MiniPlayer = () => {
           <span className="text-xs text-gray-400 mr-2 w-10">{formatTime(currentTime)}</span>
           <div className="relative flex-grow h-1 bg-white bg-opacity-10 rounded-full mx-2">
             <div 
-              className="absolute top-0 left-0 h-full bg-accent rounded-full"
+              className={`absolute top-0 left-0 h-full bg-accent rounded-full ${
+                isFading 
+                  ? 'fade-pulse' 
+                  : remainingTime && remainingTime <= 8 && remainingTime > 5 && !isFading 
+                    ? 'pulse-yellow' 
+                    : ''
+              }`}
               style={{ width: `${progress}%` }}
             ></div>
           </div>

@@ -115,9 +115,11 @@ const MusicSection = () => {
   const { 
     currentTrack, 
     isPlaying, 
+    isFading,
     progress, 
     currentTime, 
     duration, 
+    remainingTime,
     formatTime, 
     playTrack, 
     togglePlayPause,
@@ -255,10 +257,27 @@ const MusicSection = () => {
             {/* Track info */}
             <div>
               <p className="text-xs text-gray-400">
-                {currentTrack ? 'SONANDO AHORA' : 'SELECCIONA UNA CANCIÓN'}
+                {currentTrack 
+                  ? (isFading 
+                      ? 'BAJANDO VOLUMEN' 
+                      : (remainingTime && remainingTime <= 8 && remainingTime > 5 && !isFading
+                          ? 'FINALIZANDO PRONTO' 
+                          : 'SONANDO AHORA')
+                    )
+                  : 'SELECCIONA UNA CANCIÓN'
+                }
               </p>
-              <h3 className="text-lg font-semibold">
+              <h3 className="text-lg font-semibold flex items-center gap-2">
                 {currentTrack ? currentTrack.title : 'No track selected'}
+                {isFading ? (
+                  <span className="text-xs text-accent bg-accent bg-opacity-10 px-2 py-1 rounded-full animate-pulse">
+                    Fade out
+                  </span>
+                ) : remainingTime && remainingTime <= 8 && remainingTime > 5 && !isFading ? (
+                  <span className="text-xs text-yellow-400 bg-yellow-400 bg-opacity-10 px-2 py-1 rounded-full">
+                    Ending soon
+                  </span>
+                ) : null}
               </h3>
               <p className="text-sm text-gray-300">
                 {currentTrack ? currentTrack.album : ''}
@@ -267,7 +286,7 @@ const MusicSection = () => {
           </div>
           
           {/* Waveform visualization */}
-          <div className="relative h-16 mb-2 waveform origin-left">
+          <div className={`relative h-16 mb-2 waveform origin-left ${isFading ? 'fade-progress-glow' : ''}`}>
             <div className="absolute inset-0 flex items-center">
               {/* Generate 100 wave bars */}
               {[...Array(100)].map((_, index) => (
@@ -275,12 +294,20 @@ const MusicSection = () => {
                   key={index}
                   className={`wave-bar h-8 w-1 mx-px ${
                     currentTrack && index < progress 
-                      ? 'bg-accent opacity-70' 
+                      ? `bg-accent ${
+                         isFading 
+                           ? 'wave-fade-animation' 
+                           : remainingTime && remainingTime <= 8 && remainingTime > 5 && !isFading 
+                             ? 'wave-ending-soon' 
+                             : 'opacity-70'
+                       }` 
                       : 'bg-accent opacity-20'
                   }`}
                   style={{ 
                     transform: `scaleY(${Math.random() * 0.7 + 0.3})`,
-                    animationPlayState: isPlaying ? 'running' : 'paused'
+                    animationPlayState: isPlaying ? 'running' : 'paused',
+                    '--wave-height': `${Math.random() * 0.7 + 0.3}`,
+                    opacity: isFading ? undefined : (index < progress ? 0.7 : 0.2)
                   }}
                 ></div>
               ))}
@@ -293,7 +320,13 @@ const MusicSection = () => {
             onClick={handleProgressClick}
           >
             <div 
-              className="absolute top-0 left-0 h-full bg-accent rounded-full"
+              className={`absolute top-0 left-0 h-full bg-accent rounded-full ${
+                isFading 
+                  ? 'fade-pulse' 
+                  : remainingTime && remainingTime <= 8 && remainingTime > 5 && !isFading 
+                    ? 'pulse-yellow' 
+                    : ''
+              }`}
               style={{ width: `${progress}%` }}
             ></div>
           </div>

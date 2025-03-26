@@ -1,0 +1,78 @@
+/* Animation classes for fade effects */
+
+@keyframes fadeVolumePulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.fade-pulse {
+  animation: fadeVolumePulse 2s infinite ease-in-out;
+}
+
+@keyframes fadeProgressGlow {
+  0% { box-shadow: 0 0 2px 1px rgba(255, 87, 34, 0.2); }
+  50% { box-shadow: 0 0 6px 2px rgba(255, 87, 34, 0.5); }
+  100% { box-shadow: 0 0 2px 1px rgba(255, 87, 34, 0.2); }
+}
+
+.fade-progress-glow {
+  animation: fadeProgressGlow 2s infinite ease-in-out;
+}
+
+/* Animación para la barra de progreso cuando está terminando pronto */
+@keyframes yellowPulse {
+  0% { box-shadow: 0 0 2px 1px rgba(253, 224, 71, 0.2); }
+  50% { box-shadow: 0 0 6px 2px rgba(253, 224, 71, 0.5); }
+  100% { box-shadow: 0 0 2px 1px rgba(253, 224, 71, 0.2); }
+}
+
+.pulse-yellow {
+  animation: yellowPulse 1s infinite ease-in-out;
+}
+
+/* Smooth transition for wave bar heights during fade out */
+.wave-bar {
+  transition: opacity 0.3s ease-out, transform 0.3s ease-in-out;
+}
+
+/* Add style for wave bar during fade */
+.wave-bar.fading {
+  animation: waveFadeOut 2s infinite alternate;
+}
+
+@keyframes waveFadeOut {
+  0% { opacity: var(--max-opacity, 0.7); transform: scaleY(var(--max-scale, 0.8)); }
+  100% { opacity: var(--min-opacity, 0.3); transform: scaleY(var(--min-scale, 0.3)); }
+}
+
+/* Nueva animación para el desvanecimiento de barras de onda */
+@keyframes waveBarFade {
+  0% { transform: scaleY(var(--wave-height, 0.8)); }
+  100% { transform: scaleY(0.1); }
+}
+
+.wave-fade-animation {
+  animation: waveBarFade 4.5s forwards;
+}
+
+/* Animación para el estado 'ending soon' */
+@keyframes waveBarEndingSoon {
+  0% { opacity: 0.7; }
+  50% { opacity: 0.4; }
+  100% { opacity: 0.7; }
+}
+
+.wave-ending-soon {
+  animation: waveBarEndingSoon 1s infinite;
+}
+
+/* Animated text fade */
+@keyframes textFadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.fade-text-in {
+  animation: textFadeIn 0.5s ease-out forwards;
+}

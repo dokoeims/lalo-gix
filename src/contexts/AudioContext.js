@@ -11,6 +11,8 @@ export const AudioProvider = ({ children }) => {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [isFading, setIsFading] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(null);
   
   // Initialize player callbacks with error handling
   useEffect(() => {
@@ -30,11 +32,24 @@ export const AudioProvider = ({ children }) => {
         onEnd: () => {
           setIsPlaying(false);
           setProgress(100);
+          setRemainingTime(0);
+        },
+        onFading: (fadingState) => {
+          setIsFading(fadingState);
+          // Durante el fade out, todavía consideramos que el track se está reproduciendo
+          // para efectos de UI, aunque el volumen esté disminuyendo
+          if (fadingState) {
+            setIsPlaying(true);
+          }
         },
         onProgress: ({ current, duration, progress }) => {
           setCurrentTime(current);
           setDuration(duration);
           setProgress(progress);
+          
+          // Calcular tiempo restante
+          const remaining = duration - current;
+          setRemainingTime(remaining);
         }
       });
     } catch (error) {
@@ -104,6 +119,8 @@ export const AudioProvider = ({ children }) => {
     progress,
     duration,
     currentTime,
+    isFading,
+    remainingTime,
     formatTime,
     playTrack,
     togglePlayPause,
